@@ -1,0 +1,132 @@
+\documentclass[pnumabnt,normaltoc,espacoumemeio,capchap]{abnt}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ufc}
+\usepackage[T1]{fontenc}
+%\usepackage[labelfont=bf,textfont=it]{caption}
+%\usepackage{multicol}
+%\usepackage{listings}
+%\usepackage{subfloat}
+\usepackage{subfig}
+%\usepackage[scaled=.92]{helvet}
+%\usepackage{times}
+\usepackage{amsmath}
+%\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{eucal}
+%\usepackage{dsfont}
+\usepackage{import}
+
+
+\usepackage{placeins}
+
+
+%\usepackage[chapter]{algorithm}
+%\usepackage[noend]{algpseudocode}
+
+% Declaracoes em Português
+%\algrenewcommand\algorithmicend{\textbf{fim}}
+%\algrenewcommand\algorithmicdo{\textbf{faça}}
+%\algrenewcommand\algorithmicwhile{\textbf{enquanto}}
+%\algrenewcommand\algorithmicfor{\textbf{para}}
+%\algrenewcommand\algorithmicif{\textbf{se}}
+%\algrenewcommand\algorithmicthen{\textbf{então}}
+%\algrenewcommand\algorithmicelse{\textbf{senão}}
+%\algrenewcommand\algorithmicreturn{\textbf{devolve}}
+%\algrenewcommand\algorithmicfunction{\textbf{função}}
+%\algrenewcommand\algorithmicprocedure{\textbf{procedimento}}
+%\makeatletter
+%\renewcommand{\ALG@name}{Algoritmo}
+%\makeatother
+
+\usepackage{import}
+\usepackage{color}
+\usepackage[table]{xcolor}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage[pdftex]{graphicx}
+\usepackage{microtype}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{tabularx}
+
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+    pdfborder = {0 0 0}
+}
+\usepackage[alf]{abntcite}
+
+
+% Informações gerais do documento
+\autor{Daniel Nascimento Teixeira}
+\autorr{Teixeira, D.}
+%\titulo{Uma Técnica de Decomposição a Priori para Geração Paralela de Malhas Bidimensionais}
+\local{Fortaleza, Ceará}
+\cidade{Fortaleza}
+\data{2015}
+\orientador{Prof. Dr. Joaquim Bento Cavalcante Neto}
+%%\codigocip{A000z}{CDD:000.0}
+
+% Informações institucionais
+\centro{Centro de Ciências}
+\departamento{Departamento de Computação}
+\curso{Ciência da Computação}
+\instituicao{Universidade Federal do Ceará}
+
+\tipotrabalho{Dissertação}
+\areaconcentracao{Computação Gráfica}
+
+%\dedicatoria{Aos meus Pais.}
+% Epígrafe: citação e autor
+%\epigrafe{``Uma citação citada deve citar o que se pretendia com a citação da citação''}
+%\autorepigrafe{Zé Ninguém}
+
+% Membros da comissão avaliadora
+\bancaum{\ABNTorientadordata\\Universidade Federal do Ceará (UFC)\\Orientador}
+\bancadois{\ABNTcoorientadordata\\Universidade Federal do Ceará (UFC)\\Coorientador}
+\bancatres{Prof. Dr. Luiz Fernando Martha\\Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio)}
+\bancaquatro{Prof. Dr. Emanuele Marques dos Santos\\Universidade Federal do Ceará (UFC)}
+%\bancaquatro{Prof. Dr. Zé Ninguém\\Universidade Federal do Ceará - UFC}
+
+% Palavras chave
+\pcs{Decomposição de domínios}{Geometria computacional}{Geração em paralelo de malhas}
+\kws{Domain decomposition}{Computational geometry}{Parallel mesh generation}
+
+\begin{document}
+
+\capa
+\folhaderosto
+%\makecippage
+%\termodeaprovacao
+
+% Dedicatória (Opicional)
+%\makededicatoria
+
+
+%\makeepigrafe
+%\input{abstract}
+%\input{abstract}
+\listadefiguras
+%\listadetabelas
+% \listadesiglas % \sigla{sigla}{Descrição}
+%\listadesimbolos
+%\input{simbolos}
+
+\tableofcontents
+
+%\input{introducao}   % C1
+%\input{background}   % C2
+\input{3tema} % C3
+%\input{metodo}       % C4
+%\input{resultados}   % C5
+%\input{conclusao}    % C6
+%\input{apendiceA}    % C7
+
+\nocite{bib:Triangulations_applications, bib:MFreitas13, bib:Shewchuk96b, bib:RepMarkos13, bib:Leonidas06, bib:Glut08, bib:Freitas10, bib:Lo12, bib:Persson04, bib:Pebay07, bib:Chernikov05, bib:Ruppert99, bib:Miranda99, bib:Teng93, bib:Okusanya96, bib:Zagaris09, bib:Pirzadeh09, bib:Owen98, bib:Chrisochoides05, bib:Rivara06, bib:Phongthanapanich04, bib:Lohner01, bib:Cavalcante-Neto01, bib:Yoshimura99, bib:Flynn72, bib:ElGindy86, bib:Merks86, bib:Globisch95, bib:Hodgson96, bib:Wilson98, bib:Oliker98, bib:deCougny99, bib:Minyard00, bib:Lammer00, bib:Jones00, bib:Chrisochoides00, bib:Biswas00, bib:Das01, bib:Barker04, bib:Kohout05, bib:Lawlor06, bib:Chernikov06, bib:Ito07, bib:Preparata91, bib:Carvalho91, bib:Andrews91, bib:deBerg00, bib:Frey00, bib:Ben-Ari06, bib:Hjelle06, bib:Edelsbrunner06, bib:Golub96, bib:Hearn96, bib:Angel08, bib:Grama03, bib:George98, bib:Segerlind84, bib:RedBook, bib:Farrashkhalvat03, bib:Cavalcante-Neto94, bib:Cavalcante-Neto98, bib:Shewchuck97, bib:Moretti01, bib:openmp, bib:mpi, bib:opengl, bib:wxwidgets, bib:Karypis98, bib:Karypis11, bib:Spear10, bib:Wawrzynek93, bib:Miranda03, bib:Lohner88, bib:Larwood03, bib:Ivanov06, bib:Miranda09, bib:Cavalcante-Neto05}
+
+\bibliography{bib}
+
+\appendix
+
+\end{document}

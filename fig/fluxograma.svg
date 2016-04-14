@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="fluxograma.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="StopL"
+       style="overflow:visible">
+      <path
+         id="path4324"
+         d="M 0.0,5.65 L 0.0,-5.65"
+         style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path4157"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;">
+      <path
+         id="path4175"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-1"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-4"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-4-7"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157-9-1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-7"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3926"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3928"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-2"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-3"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157-1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3896"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3898"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-5"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157-7"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-8"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157-97"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="147.06473"
+     inkscape:cy="490.11126"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     inkscape:window-x="1920"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3838"
+       transform="matrix(0.73036356,0,0,0.75404183,114.30624,-6.29799)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="35.355339"
+         y="48.256008"
+         x="225.26402"
+         height="70.710678"
+         width="245.97942"
+         id="rect3755-6"
+         style="fill:none;stroke:#000000;stroke-width:2.93557072;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3757-6"
+         y="98.523453"
+         x="259.09357"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="98.523453"
+           x="259.09357"
+           id="tspan3759-4"
+           sodipodi:role="line">Fronteira</tspan></text>
+    </g>
+    <g
+       id="g3072"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="26.659405"
+         y="311.97281"
+         x="131.75932"
+         height="53.31881"
+         width="472.98456"
+         id="rect3755-6-5"
+         style="fill:none;stroke:#000000;stroke-width:3.53479624;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         transform="scale(0.98417389,1.0160806)"
+         sodipodi:linespacing="125%"
+         id="text3757-6-0"
+         y="342.05652"
+         x="174.92014"
+         style="font-size:29.68432999px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="342.05652"
+           x="174.92014"
+           id="tspan3759-4-4"
+           sodipodi:role="line">Decomposição do Domínio</tspan></text>
+    </g>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:3.0862155;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3755-6-5-7"
+       width="360.55432"
+       height="53.31881"
+       x="188.38092"
+       y="451.61868"
+       ry="26.659405"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <a
+       id="a3055"
+       transform="translate(-4.7136712,104.00001)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <text
+         transform="scale(0.98417389,1.0160806)"
+         sodipodi:linespacing="125%"
+         id="text3757-6-0-1"
+         y="377.02231"
+         x="207.11102"
+         style="font-size:29.68432999px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="377.02231"
+           x="207.11102"
+           id="tspan3759-4-4-7"
+           sodipodi:role="line">Geração das Interfaces</tspan></text>
+    </a>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:3.23797083;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3755-6-5-7-7"
+       width="396.88443"
+       height="53.31881"
+       x="170.21587"
+       y="591.94995"
+       ry="26.659405"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <a
+       id="a3062"
+       transform="translate(-4.3809981e-6,104)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <text
+         transform="scale(0.98417389,1.0160806)"
+         sodipodi:linespacing="125%"
+         id="text3757-6-0-1-2"
+         y="514.65436"
+         x="188.60994"
+         style="font-size:29.68432999px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="514.65436"
+           x="188.60994"
+           id="tspan3759-4-4-7-2"
+           sodipodi:role="line">Balanceamento da Carga</tspan></text>
+    </a>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.11316252;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Lend)"
+       d="m 368.65808,83.407868 0,84.564942"
+       id="path3969"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#g3838"
+       inkscape:connection-start-point="d4"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.11300004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend);display:inline"
+       d="m 368.65808,504.9375 0,87.01243"
+       id="path4781"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.11316252;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend);display:inline"
+       d="m 368.65808,365.29162 0,86.32707"
+       id="path5151"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="star"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:6.80053043;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5833"
+       sodipodi:sides="4"
+       sodipodi:cx="-644.47729"
+       sodipodi:cy="595.77325"
+       sodipodi:r1="57.142857"
+       sodipodi:r2="40.406101"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m -604.07119,636.17936 -80.81221,0 0,-80.81221 80.81221,0 z"
+       transform="matrix(0.83460792,0,0,0.02386252,906.54393,679.95219)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.11300004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend-4)"
+       d="m 368.65808,645.26874 0,47.93591"
+       id="path5837"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end-point="d4"
+       inkscape:connection-end="#path5833"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g3073"
+       transform="matrix(0.9378337,0,0,0.9378337,15.598088,108.28946)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="matrix(0.77877726,0,0,0.80402509,-214.25191,392.96226)"
+         id="g3916-6">
+        <g
+           transform="translate(165.66502,-60.609153)"
+           id="g5364">
+          <rect
+             ry="35.355339"
+             y="431.11838"
+             x="93.971886"
+             height="70.710678"
+             width="391.26294"
+             id="rect3755-6-5-7-7-1"
+             style="fill:none;stroke:#000000;stroke-width:3.70235062;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <text
+             sodipodi:linespacing="125%"
+             id="text3757-6-0-1-2-0"
+             y="478.15341"
+             x="108.74398"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+             xml:space="preserve"><tspan
+               y="478.15341"
+               x="108.74398"
+               id="tspan3759-4-4-7-2-6"
+               sodipodi:role="line">Geração da Malha</tspan></text>
+        </g>
+      </g>
+      <g
+         transform="matrix(0.77877726,0,0,0.80402509,258.07324,392.96226)"
+         id="g3916-6-0">
+        <g
+           transform="translate(165.66502,-60.609153)"
+           id="g5364-9">
+          <rect
+             ry="35.355339"
+             y="431.11838"
+             x="93.971886"
+             height="70.710678"
+             width="391.26294"
+             id="rect3755-6-5-7-7-1-1"
+             style="fill:none;stroke:#000000;stroke-width:3.70235062;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <text
+             sodipodi:linespacing="125%"
+             id="text3757-6-0-1-2-0-7"
+             y="478.15341"
+             x="108.74398"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+             xml:space="preserve"><tspan
+               y="478.15341"
+               x="108.74398"
+               id="tspan3759-4-4-7-2-6-7"
+               sodipodi:role="line">Geração da Malha</tspan></text>
+        </g>
+      </g>
+      <g
+         transform="translate(0,-17.360345)"
+         id="g3856">
+        <path
+           sodipodi:type="arc"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3.04500008;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path3829"
+           sodipodi:cx="206.42857"
+           sodipodi:cy="837.36218"
+           sodipodi:rx="7.8571429"
+           sodipodi:ry="7.8571429"
+           d="m 214.28572,837.36218 c 0,4.33938 -3.51777,7.85715 -7.85715,7.85715 -4.33938,0 -7.85714,-3.51777 -7.85714,-7.85715 0,-4.33938 3.51776,-7.85714 7.85714,-7.85714 4.33938,0 7.85715,3.51776 7.85715,7.85714 z"
+           transform="matrix(0.77154172,0,0,0.77154172,179.01746,90.588039)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3.04500008;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path3829-6"
+           sodipodi:cx="206.42857"
+           sodipodi:cy="837.36218"
+           sodipodi:rx="7.8571429"
+           sodipodi:ry="7.8571429"
+           d="m 214.28572,837.36218 c 0,4.33938 -3.51777,7.85715 -7.85715,7.85715 -4.33938,0 -7.85714,-3.51777 -7.85714,-7.85715 0,-4.33938 3.51776,-7.85714 7.85714,-7.85714 4.33938,0 7.85715,3.51776 7.85715,7.85714 z"
+           transform="matrix(0.77154172,0,0,0.77154172,209.30315,90.588039)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3.04500008;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path3829-64"
+           sodipodi:cx="206.42857"
+           sodipodi:cy="837.36218"
+           sodipodi:rx="7.8571429"
+           sodipodi:ry="7.8571429"
+           d="m 214.28572,837.36218 c 0,4.33938 -3.51777,7.85715 -7.85715,7.85715 -4.33938,0 -7.85714,-3.51777 -7.85714,-7.85715 0,-4.33938 3.51776,-7.85714 7.85714,-7.85714 4.33938,0 7.85715,3.51776 7.85715,7.85714 z"
+           transform="matrix(0.77154172,0,0,0.77154172,239.58888,90.588039)" />
+      </g>
+    </g>
+    <g
+       id="g3907"
+       transform="matrix(0.9378337,0,0,0.9378337,1.627775,110.28946)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="28.42658"
+         y="908.7782"
+         x="286.05609"
+         height="56.853161"
+         width="210.60719"
+         id="rect3755-6-50"
+         style="fill:none;stroke:#000000;stroke-width:2.4356482;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         transform="scale(0.98417389,1.0160806)"
+         sodipodi:linespacing="125%"
+         id="text3757-6-4"
+         y="931.61462"
+         x="309.94537"
+         style="font-size:31.6520195px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="931.61462"
+           x="309.94537"
+           id="tspan3759-4-8"
+           sodipodi:role="line">Finalização</tspan></text>
+    </g>
+    <path
+       sodipodi:type="star"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:6.80053043;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5833-2"
+       sodipodi:sides="4"
+       sodipodi:cx="-644.47729"
+       sodipodi:cy="595.77325"
+       sodipodi:r1="57.142857"
+       sodipodi:r2="40.406101"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m -604.07119,636.17936 -80.81221,0 0,-80.81221 80.81221,0 z"
+       transform="matrix(0.83460792,0,0,0.02386252,906.54393,885.31629)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.11300004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#marker3926)"
+       d="m 368.65808,900.49713 0,62.07515"
+       id="path3989"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#path5833-2"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#g3907"
+       inkscape:connection-end-point="d4"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png" />
+    <g
+       id="g3919"
+       transform="translate(5.9542491,416)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/nfs/daniel/Desktop/path3989.png"
+         inkscape:connector-curvature="3"
+         inkscape:connector-type="polyline"
+         id="path4781-9-1"
+         d="m 361.5805,278.77846 226.05348,59.33008"
+         style="fill:none;stroke:#000000;stroke-width:1.11300004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend);display:inline" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/nfs/daniel/Desktop/path3989.png"
+         inkscape:connector-curvature="3"
+         inkscape:connector-type="polyline"
+         id="path4781-9-1-6"
+         d="m 363.65488,278.37963 -237.7897,60.79658"
+         style="fill:none;stroke:#000000;stroke-width:1.11300004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend);display:inline" />
+    </g>
+    <g
+       id="g3923"
+       transform="translate(-0.8346359,416)"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/nfs/daniel/Desktop/path3989.png"
+         inkscape:connector-curvature="3"
+         inkscape:connector-type="polyline"
+         id="path4781-9-1-0"
+         d="M 368.81623,481.91242 608.9139,394.75346"
+         style="fill:none;stroke:#000000;stroke-width:1.11300004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend);display:inline" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/nfs/daniel/Desktop/path3989.png"
+         inkscape:connector-curvature="3"
+         inkscape:connector-type="polyline"
+         id="path4781-9-1-6-2"
+         d="M 370.30895,482.37675 131.74081,394.05305"
+         style="fill:none;stroke:#000000;stroke-width:1.11300004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend);display:inline" />
+    </g>
+    <g
+       id="g3064"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="26.659405"
+         y="169.33708"
+         x="205.38568"
+         height="53.31881"
+         width="326.5448"
+         id="rect3755-6-5-2"
+         style="fill:none;stroke:#000000;stroke-width:2.9370563;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         transform="scale(0.98417389,1.0160806)"
+         sodipodi:linespacing="125%"
+         id="text3757-6-0-5"
+         y="201.08391"
+         x="374.48486"
+         style="font-size:29.68432999px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="201.08391"
+           x="374.48486"
+           id="tspan3759-4-4-3"
+           sodipodi:role="line">Estimativa de Carga</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.11316252;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend);display:inline"
+       d="m 368.65808,222.77459 0,86.32707"
+       id="path5151-4"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:export-filename="/home/nfs/daniel/Daniel_Trabalhos/Mestrado/projeto-dissertacao/fig/fluxograma.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>
