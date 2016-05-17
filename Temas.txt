@@ -1,15 +1,52 @@
-Principal: Geração em Paralelo de Malhas com particionamento a Priori
+1º Tema - Principal: Particionamento de malhas a Priori para geração em Paralelo de Malhas
+
+	Introdução
+
+	Conceitos e definições
+
+	Algoritmo a Priori proposto
+		Estimativa de Carga
+		Particionamento da Carga
+		Balanceamento
+		Geração da Malha
+		Finalização da Malha
+	Resultados
+
+	Conclusão
 
 
+2º Tema: Particionamento de Modelos para geração Malha em paralelo
+
+	Introdução
+	
+	Conceitos e definições
+		Geração de malhas
+		Estruturas de Dados
+		Estimativa de Carga
+		Particionamento de Malhas
+		Balanceamento de Carga
 
 
+	Trabalhos de Particionamentos
+		Particionamento Baseado na Geometria
+		Particionamento Baseada em Estruturas de Dados
+
+	Conclusão
 
 
+3º Tema: Programação Paralela
 
+	Computação de Alto Desempenho
+		Classes de Arquiteturas Existentes
+		Paradigmas de programação paralela - Modelos
 
+	Fases da programação paralela
 
-2º Tema:
+	Problemas na programação paralela
 
+	Métricas de Desempenho
+		Desempenho e Escalabilidade
 
+	Ambientes para programação paralela
 
-3º Tema:
+	Conclusão

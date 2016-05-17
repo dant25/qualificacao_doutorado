@@ -452,5 +452,160 @@ Na técnica de \cite{bib:Lohner01}, é gerada uma \textit{octree} grosseira com 
 
 
     \begin{figure}[!ht]
-    \centering
-    \subfloat[\textit{Octree} gerada para uma borda e passos do algoritmo (representação 2D, ou seja
+    	\centering
+    	\subfloat[\textit{Octree} gerada para uma borda e passos do algoritmo (representação 2D, ou seja, uma \textit{quadtree}).]
+    	{\label{fig:lohner1}
+    		\begin{minipage}[c]{0.45\textwidth}{\includegraphics[width=\textwidth]{fig/lohner1.png}}\end{minipage}
+    	}
+    	\qquad
+    	\subfloat[Deslocamento da \textit{quadtree} para gerar mais malha (a linha escura é a fronteira).]
+    	{\label{fig:lohner2}
+    		\begin{minipage}[c]{0.45\textwidth}{\includegraphics[width=\textwidth]{fig/lohner2.png}}\end{minipage}
+    	}    
+    	\caption{Técnica de \cite{bib:Lohner01}.}
+    	\label{fig:lohner}
+    \end{figure}
+    
+    O deslocamento de cada octante é feito seguindo-se sempre o mesmo processo, e isso pode não ser o ideal para certos tipos de modelos, onde maneiras distintas de deslocamento poderiam ser mais eficientes (deslocamentos na diagonal, na direção dos eixos principais, entre outros).
+    
+    No trabalho de \cite{bib:LOHNER14} traz algumas técnicas recentes na área de geração de malhas em paralelo. A principal novidade é a utilização da própria estrutura da árvore de decomposição para unir as interfaces dos subdomínios. A utilização da árvore de decomposição já torna a paralelização mais natural e simples (Figura \ref{fig:lohner14}).
+    
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=1.0\textwidth]{fig/lohner14.png}
+    	\caption{Junção das malhas dos subdomínios em \cite{bib:LOHNER14}.}
+    	\label{fig:lohner14}
+    \end{figure}
+    
+    
+    Em \cite{bib:Larwood03}, é apresentada uma técnica de decomposição de domínio que tem como entrada uma triangulação de borda. Para saber quais subdomínios devem ser divididos, a técnica usa um critério baseado na quantidade de faces por subdomínio. A decomposição é feita recursivamente usando uma \textit{octree} caso seja tridimensional ou uma \textit{quadtree} caso seja bidimensional, verificando sempre se o número de faces de um subdomínio é menor do que o limite estipulado, e, enquanto a verificação for falsa, a decomposição ocorre. A quantidade máxima de subdivisões está limitada por uma constante maior que o número de processadores disponíveis. Isso evita a criação excessiva de partições e permite que um processador possa receber mais de uma tarefa ao longo da execução. As interfaces dos subdomínios são geradas \textit{a priori} por Delaunay. A qualidade da malha não é garantida neste trabalho, são apresentados apenas resultados de balanceamento de carga entre os processadores que é garantido pela \
+    textit{over-decomposition}.
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{fig/larwood03.jpg}
+    	\caption{Regiões de corte inválidas em cinza \cite{bib:Larwood03}.}
+    	\label{fig:larwood03}
+    \end{figure}
+    
+    Para evitar a criação de elementos ruins, é feita uma verificação no corte baseada no ângulo do vetor normal do plano de corte com a normal dos triângulos, de forma que o plano de corte não possa passar por triângulos com ângulo menor do que uma tolerância. Caso essa verificação falhe, a \textit{octree} (\textit{quadtree}, em 2D) sofre um deslocamento em um dos eixos. A Figura~\ref{fig:larwood03} mostra um exemplo onde alguns planos de corte falham nos testes. 
+    
+    No trabalho de \cite{bib:CHARMPIS05} trabalha com malhas de elementos finitos e é feita uma representação da entrada  como um grafo e em seguida é utilizado um particionador de grafos (SCGEN) que procura dividir os pesos do pesos dos nós e arestas do grafo de acordo com a quantidade de processadores disponíveis. A imagem \ref{fig:dimos} mostra uma malha de elementos finitos e a sua partição como grafo.
+    
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=0.6\textwidth]{fig/dimos.png}
+    	\caption{Malha de elementos finitos (esquerda) e a partição da malha com sua representação em grafo (à direita) em \cite{bib:CHARMPIS05}. }
+    	\label{fig:dimos}
+    \end{figure}
+    
+    
+    Em \cite{bib:Leonidas06}, é apresentada uma técnica bidimensional que utiliza a triangulação de Delaunay por divisão e conquista para um conjunto de pontos dados como entrada. Primeiramente, é feita uma triangulação utilizando apenas os pontos da borda, que é utilizada para a geração de um grafo ponderado, onde o peso de uma aresta é igual ao raio da circunferência circunscrita do triângulo que a contém. Em seguida é feita uma contração desse grafo, onde os vértices do grafo representam a área a ser triangularizada (futuros subdomínios), e as arestas representam a conexão entre essas áreas.
+    
+    Através do grafo formado, os planos de corte são posicionados e os subdomínios formados. A Figura~\ref{fig:leonidas06} mostra o resultado da decomposições para quantidades diferentes de subdomínios. Esse processo de subdivisão ocorre até que a quantidade de subdomínios criados seja suficientemente grande. Isso acontece para tentar melhorar o balanceamento de carga. Após isso, a geração da malha interna poderá ser realizada. A desvantagem dessa técnica é a ausência de uma estimativa de carga eficiente, precisando gerar vários subdomínios para melhorar o balanceamento de carga.
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=0.7\textwidth]{fig/leonidas06.jpg}
+    	\caption{Construção do grafo de particionamento de \cite{bib:Leonidas06}.}
+    	\label{fig:leonidas06}
+    \end{figure} 
+    
+    
+    Em \cite{bib:Ito07} o particionador de malhas METIS também é utilizado. Uma malha tetraédrica grosseira é gerada inicialmente com base nas faces da superfície. O particionador de grafos METIS é utilizado para subdividir o domínio tendo como base a malha grosseira gerada. A Figura \ref{fig:ito} mostra para uma esfera o processo de particionamento.
+    
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{fig/ito.png}
+    	\caption{Malha tetraédrica inicial, malha de superfície refinada nos subdomínios e melhorias nas faces de superfície no trabalho de \cite{bib:Ito07}.}
+    	\label{fig:ito}
+    \end{figure}
+    
+    Outro trabalho que também utiliza grafos é o de \cite{bib:PANITANARAK11}, que descreve uma técnica de decomposição Discreta que utiliza o programa de partição de grafos METIS (\cite{bib:Karypis98}). Primeiramente é construída uma malha grosseira com a restrição dos ângulos formados com a fronteira sejam maiores que 30º. Com a malha devidamente criada, é feita a sua conversão para um grafo, onde cada triângulo é representado como um nó e cada aresta como a vizinhança dos triângulos. O particionamento é feito neste grafo de acordo com a quantidade de subdomínios desejado. A Figura \ref{fig:panitanarak} mostra um exemplo de particionamento feito utilizando esta técnica.
+    
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=0.6\textwidth]{fig/panitanarak.png}
+    	\caption{Decomposição feita pela técnica de \cite{bib:PANITANARAK11}.}
+    	\label{fig:panitanarak}
+    \end{figure}
+    
+    
+    Em \cite{bib:Lo12}, uma técnica bidimensional para uma triangulação de Delaunay por inserção de pontos é apresentada. Uma \textit{kd-tree} é utilizada para organizar os pontos da entrada em células. Estas células são agrupadas em zonas e distribuídas entre os processadores. A vantagem de usar uma \textit{kd-tree} é que cada célula tem uma quantidade de pontos aproximadamente igual e a busca espacial é facilitada na hora de fazer a inserção de pontos em uma região. A Figura~\ref{fig:lo12_1} mostra a organização de um conjunto de pontos por partição regular e por \textit{kd-tree}.
+    
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{fig/lo12_1.jpg}
+    	\caption{Pontos organizados em células. À esquerda por partição regular e à direita por \textit{kd-tree} \cite{bib:Lo12}.}
+    	\label{fig:lo12_1}
+    \end{figure} 
+    
+    
+    A quantidade de subdomínios criados é compatível com a quantidade de processadores disponíveis, ou seja, cada processador terá que ficar responsável por uma zona. A inserção dos pontos em cada zona é feita em paralelo, sendo totalmente independente das outras zonas, e a malha gerada em cada zona também será independente.
+    
+    Os triângulos gerados nas bordas das zonas têm pontos de uma zona vizinha. Isso irá gerar uma camada a mais de triângulos nas zonas, que é necessário para obter uma malha sem buracos entre elas. Ao final, tem de ser feita a junção de todas as malhas geradas em uma só e, para isso, é preciso eliminar as redundâncias (triângulos repetidos entre duas zonas). Essa junção das malhas pode ser um processo complexo em determinados modelos e isso pode prejudicar o desempenho do algoritmo. A Figura~\ref{fig:lo12_2} mostra o fluxograma da triangulação em paralelo.
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{fig/lo12_2.png}
+    	\caption{ Fluxograma da triangulação em paralelo \cite{bib:Lo12}.}
+    	\label{fig:lo12_2}
+    \end{figure}
+    
+    O trabalho de \cite{bib:MFreitas13} apresenta uma técnica bidimensional que recebe como entrada uma fronteira e utiliza uma \textit{quadtree} para particionar e estimar a carga. As células folhas da \textit{quadtree} de particionamento são divididas entre os processadores disponíveis, onde são geradas as malhas internas. Depois de gerar as malhas nos subdomínios iniciais, a fronteira é atualizada e as células da \textit{quadtree} são deslocadas nos eixos cartesianos a fim de gerar mais malha. Esse processo de deslocamento e geração de malha é feito até que não seja mais possível gerar malha. Um processo mestre fica responsável por finalizar a geração da malha e fazer a melhoria na mesma. Este trabalho é classificado como contínuo \textit{a posteriori}. A Figura~\ref{fig:mfreitas} ilustra o passo de deslocamento da \textit{quadtree} no eixo X.
+    
+    \begin{figure}[htbp]
+    	\centering
+    	\includegraphics[width=0.4\textwidth]{fig/decomposition_quadtree_shift.png}
+    	\caption{ Malha gerada, espalhada entre os processos escravos, e as células da \textit{quadtree} de decomposição deslocadas para a direção +X \cite{bib:MFreitas13}.}
+    	\label{fig:mfreitas}
+    \end{figure}
+    
+    
+    Em \cite{bib:RepMarkos13}, é apresentada uma evolução da técnica anterior que pode ser tanto bidimensional como tridimensional, por Avanço de Fronteira, com subdivisão baseada em BSP, que recebe como entrada uma superfície de faces triangulares ou uma lista de arestas, para o caso bidimensional. Inicialmente uma \textit{octree} é construída para estimar a carga no domínio de acordo com o tamanho das faces da superfície. As células internas da \textit{octree} têm o tamanho definido de acordo com a maior e a menor face da superfície de entrada. Uma BSP é utilizada para particionar o domínio de tal forma que a quantidade de subdomínios criados seja igual à quantidade de processadores disponíveis.
+    
+    Após o particionamento, cada subdomínio pertencente a uma folha da árvore BSP gera sua malha por avanço de fronteira até que não seja mais possível avançar (quando chega no plano criado pela BSP), como mostra a Figura \ref{fig:passo_markos1}. Quando os dois filhos de um nó da BSP terminam de gerar a malha nos seus respectivos subdomínios, o nó pai fica encarregado de juntar as duas malhas e, se necessário, terminar a geração da malha no novo subdomínio criado pela junção dos dois filhos, como mostra as Figuras \ref{fig:passo_markos2}, \ref{fig:passo_markos3} e \ref{fig:passo_markos4}.
+    
+    \begin{figure}[h]
+    	\centering
+    	\subfloat[Malha gerada nas folhas da árvore da BSP.]
+    	{\label{fig:passo_markos1}
+    		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/passo_markos1.png}}\end{minipage}
+    	}
+    	\qquad
+    	\subfloat[Junção e geração da malha no terceiro nível da árvore da BSP.]
+    	{\label{fig:passo_markos2}
+    		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/passo_markos2.png}}\end{minipage}
+    	}
+    	
+    	\subfloat[Junção e geração da malha no segundo nível da árvore da BSP.]
+    	{\label{fig:passo_markos3}
+    		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/passo_markos3.png}}\end{minipage}
+    	}    
+    	\qquad
+    	\subfloat[Malha final utilizando particionamento baseado em BSP.]
+    	{\label{fig:passo_markos4}
+    		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/passo_markos4.png}}\end{minipage}
+    	}
+    	\caption{Passos da geração da malha no trabalho de \cite{bib:RepMarkos13}. Cada cor representa a malha gerada por um processador.}
+    	\label{fig:tecnica Markos 2013}
+    \end{figure}
+    
+    
+    A grande vantagem dessa técnica está na utilização da BSP, que acaba permitindo a geração de subdomínios com cargas mais equilibradas e no ganho de velocidade ao se evitar os deslocamentos que aconteciam anteriormente. Por essa abordagem necessitar de uma sincronização e junção da malha em cada nível da BSP, há uma perda na velocidade apesar dessas junções serem feitas em paralelo por processos diferentes.
+    
+    
+    
+    \section{Considerações Finais}
+    
+    
+    Este capítulo teve como finalidade apresentar todos os conceitos necessários para o leitor entender os passos básicos para a geração de malha em paralelo. Ao final deste capítulo o leitor terá condições de avaliar e classificar as diversas técnicas de geração de malha em paralelo que existem na literatura.
+    
+    As técnicas que foram discutidas neste capítulo, em geral, apresentam bons resultados, mas a estimativa de carga na maioria deles é inexistente ou apenas uma métrica para contagem. Sem uma boa estimativa de carga, o balanceamento de carga pode ser um problema, fazendo o desempenho do algoritmo paralelo cair. A forma mais comum adotada pelos trabalhos é de realizar várias subdivisões até que a quantidade de subdomínios criados sejam maior que a quantidade de processadores disponíveis, com isso a falta de estimativa de carga é contornada.
+    
+    A forma com que os cortes são posicionados nessas técnicas dependem bastante do formato do objeto de entrada. Além disso, algumas técnicas necessitam de intervenção de um usuário, ou seja, o processo de geração da malha não é totalmente automático. Uma boa abordagem de balanceamento e de decomposição de domínio é essencial para algoritmos de subdivisão de domínios, caso contrário, o tempo para geração de malha pode ser prejudicado e a qualidade da malha ser afetada.
