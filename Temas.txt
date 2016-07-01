@@ -2,15 +2,12 @@
 
 	Introdução
 
-	Conceitos e definições
-
 	Algoritmo a Priori proposto
 		Estimativa de Carga
 		Particionamento da Carga
 		Balanceamento
 		Geração da Malha
 		Finalização da Malha
-	Resultados
 
 	Conclusão
 
