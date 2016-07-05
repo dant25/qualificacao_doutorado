@@ -230,6 +230,15 @@ Esse procedimento é realizado em todos os eixos e ao final é selecionado o par
 \end{figure}
 
 
+Nos casos que o número de partições desejado seja ímpar, é aplicado um valor para indicar que a carga de uma região deve ser proporcional a $X$ vezes a de outra região. Com a aplicação desses pesos, é garantido que para qualquer quantidade de partições desejada, a BSP irá encontrar o melhor corte que dividirá a carga entre as partições. A Figura \ref{fig:circunferencia_cortejunto} mostra o processo de particionamento em uma circunferência para 3 regiões.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{fig/circunferencia_cortejunto.png}
+	\caption{Proporção 2:1 é aplicada, fazendo um lado ter duas vezes mais carga que o outro (lado esquerdo). Resultado final é apresentado no lado esquerdo.}
+	\label{fig:circunferencia_cortejunto}
+\end{figure}
+
 \subsection{Criação das Interfaces}
 
 Na geração das interfaces dos subdomínios, é necessário ter a estrutura de estimativa de carga( uma \textit{quadtree} no caso bidimensional e uma \textit{octree} no caso tridimensional) e a estrutura de particionamento devidamente criadas(a BSP). Qualquer outra estrutura de decomposição espacial que gere regiões paralelas aos eixos pode ser utilizada nessa técnica de geração de subdomínios. 
@@ -378,6 +387,17 @@ O critério de seleção inicial das arestas é obter todas as arestas que inter
 A melhoria do ciclo de arestas é feito visando melhorar o angulo entre as arestas, consequentemente melhorará a malha de interface que será gerada. Para cada par de arestas vizinhas é feito uma verificação se existe uma face que contém estas duas arestas, se existir e o angulo entre as arestas melhorar, estas duas arestas serão removidas e será adicionada a outa aresta da face encontrada. Um exemplo pode ser visto da Figura \ref{fig:melhoria_arestas_faces} onde é possível ver as mudanças que ocorreram quando a melhoria foi realizada.
 
 \subsection{Balanceamento da Carga}
+
+
+Após todos os subdomínios estarem devidamente criados, eles devem ser distribuídos entre os processadores disponíveis para que as submalhas sejam geradas por alguma técnica de geração de malha. Essa distribuição das tarefas deve ser feita de tal forma que todos os processadores gastem a mesma quantidade de tempo, evitando que algum processador fique sobrecarregado ou ocioso.
+
+De acordo com o modo que o domínio é particionado, pode-se ter como resultado diversas tarefas para serem distribuídas (caso o número de tarefas seja maior que o de processadores) ou então a mesma quantidade de tarefas e processadores. Por isso uma estratégia de balanceamento não-centralizado é utilizadas neste trabalho.
+
+
+
+
+Quando uma BSP for usada para particionar, cada processo receberá uma única tarefa, onde cada tarefa corresponde a uma célula folha da BSP. Quando duas células que pertencem a um mesmo nó terminarem de fazer sua computação, um dos processadores dessas células ficará responsável por juntar as duas submalhas e fazer a melhoria na malha resultante. Esse processo é feito para cada par de células que pertence a um mesmo nó da BSP até chegar no nó raiz.
+
 
 
 \subsection{Geração da Malha}
