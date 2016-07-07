@@ -391,16 +391,73 @@ A melhoria do ciclo de arestas é feito visando melhorar o angulo entre as arest
 
 Após todos os subdomínios estarem devidamente criados, eles devem ser distribuídos entre os processadores disponíveis para que as submalhas sejam geradas por alguma técnica de geração de malha. Essa distribuição das tarefas deve ser feita de tal forma que todos os processadores gastem a mesma quantidade de tempo, evitando que algum processador fique sobrecarregado ou ocioso.
 
-De acordo com o modo que o domínio é particionado, pode-se ter como resultado diversas tarefas para serem distribuídas (caso o número de tarefas seja maior que o de processadores) ou então a mesma quantidade de tarefas e processadores. Por isso uma estratégia de balanceamento não-centralizado é utilizadas neste trabalho.
+De acordo com o modo que o domínio é particionado, pode-se ter como resultado diversas tarefas para serem distribuídas (caso o número de tarefas seja maior que o de processadores) ou então ter a mesma quantidade de tarefas e processadores. O número de tarefas é o mesmo de folhas da BSP de particionamento, por isso uma estratégia de balanceamento não-centralizado que utiliza uma BSP para balancear a carga é utilizada neste trabalho.
+
+O balanceamento de carga é feito a medida que novos cortes são feitos domínio. Inicialmente um único processador é responsavel por realizar o primeiro corte, após isso, novos processadores irão sendo ativados para continuar o particionamento. Ao final do particionamento todos os processadores já estarão com os seus respectivos subdomínios. A Figura \ref{fig:arvore_balanceamento} mostra a árvore resultante para o balanceamento do modelo da Figura \ref{fig:celulas_selecionadas2d}.
 
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{fig/arvore_balanceamento.png}
+	\caption{Balanceamento de carga feito para o modelo da Figura \ref{fig:celulas_selecionadas2d}.}
+	\label{fig:arvore_balanceamento}
+\end{figure}
 
 
-Quando uma BSP for usada para particionar, cada processo receberá uma única tarefa, onde cada tarefa corresponde a uma célula folha da BSP. Quando duas células que pertencem a um mesmo nó terminarem de fazer sua computação, um dos processadores dessas células ficará responsável por juntar as duas submalhas e fazer a melhoria na malha resultante. Esse processo é feito para cada par de células que pertence a um mesmo nó da BSP até chegar no nó raiz.
+Se a quantidade de tarefas e processadores forem iguais, cada processador receberá uma única tarefa, onde cada tarefa corresponde a uma célula folha da BSP de particionamento. Quando duas células que pertencem a um mesmo nó terminarem de fazer sua computação, um dos processadores dessas células ficará responsável por juntar as duas submalhas e fazer a melhoria na malha resultante. Esse processo é feito para cada par de células que pertence a um mesmo nó da BSP até chegar no nó raiz. A Figura \ref{fig:balanceamento_esfera} ilustra este processo.
 
+
+\begin{figure}[!ht]
+	\centering    
+	\subfloat[Processador $P1$ será o responsável por fazer a junção da malha vermelha e azul.]
+	{\label{fig:balanceamento_esfera1}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/balanceamento1.png}}\end{minipage}
+	}
+	\qquad
+	\subfloat[Processador $P2$ será o responsável por fazer a junção da malha azul e verde.]
+	{\label{fig:balanceamento_esfera2}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/balanceamento2.png}}\end{minipage}
+	}
+	\caption{Etapas do balanceamento de tarefas entre os processadores para o moledo da Figura \ref{fig:celulas_selecionadas2d}.}
+	\label{fig:balanceamento_esfera}
+\end{figure}
 
 
 \subsection{Geração da Malha}
+
+Cada processador tem a possibilidade de aplicar algoritmos diferentes se desejado, podendo aplicar qualquer técnica de geração de malha que respeite os pré-requisitos citados no início desta seção. Foi selecionado uma técnica de Avanço de Fronteira para realizar os testes.
+
+O algoritmo de Avanço de Fronteira utilizado foi desenvolvido em \cite{bib:Miranda99} e \cite{bib:Cavalcante-Neto01}. Estruturas de dados geométricas foram utilizadas para acelerar a busca por vértices candidatos para a geração de um novo triângulo e para a busca de possíveis arestas intersectantes, garantindo uma rápida execução do procedimento de geração de malha.
+
+O processo de geração de malha consiste em três etapas. A primeira é baseada na geometria, tentando gerar elementos de boa qualidade mantendo a validade da malha. A segunda é baseada na topologia, buscando apenas gerar elementos válidos, mesmo eles não sendo de boa qualidade. A ultima fase é a de geração por retrocesso (\textit{back-tracking}), que tenta finalizar a geração da malha nas áreas onde não foi possível realizar o avanço de fronteira. Vale lembrar que nos casos tridimensionais nem sempre existe uma solulção para a geração da malha.
+
+Na versão bidimensional da tecnica as duas primeiras fases são suficientes para gerar a malha triagular. Na versão tridimensional nem sempre as duas primeiras fases conseguem finalizar a malha, por isso é necessário o passo de geração por retrocesso (\textit{back-tracking}). A Figura \ref{fig:melhoria_arestas_faces} ilustra o processo de retrocesso aplicado a uma cavidade.
+
+
+\begin{figure}[ht]
+	\centering
+	\subfloat[Cavidade em cinza.]
+	{\label{fig:melhoria_arestas_faces_ruim1}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking1.png}}\end{minipage}
+	}
+	\qquad
+	\subfloat[Teste de visibilidade sendo feito com o centroide (em azul) e suas arestas de teste.]
+	{\label{fig:melhoria_arestas_faces_bom1}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking2.png}}\end{minipage}
+	}
+	
+	\subfloat[Cavidade após remoção de um elemento.]
+	{\label{fig:melhoria_arestas_faces_ruim2}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking3.png}}\end{minipage}
+	}    
+	\qquad
+	\subfloat[Malha final, ligada ao centroide, após o retrocesso ser aplicado.]
+	{\label{fig:melhoria_arestas_faces_bom2}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking4.png}}\end{minipage}
+	}
+	\caption{Geração de malhas por retrocesso.}
+	\label{fig:melhoria_arestas_faces}
+\end{figure}
 
 
 \subsection{Junção e Finalização da Malha}
