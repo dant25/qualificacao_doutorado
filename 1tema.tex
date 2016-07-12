@@ -362,22 +362,22 @@ O critério de seleção inicial das arestas é obter todas as arestas que inter
 	\centering
 	\subfloat[Modelo 01: Arestas selecionadas inicialmente.]
 	{\label{fig:melhoria_arestas_faces_ruim1}
-		\begin{minipage}[c]{0.4\textwidth}{\includegraphics[width=\textwidth]{fig/exemplo_arestas_ruim1.png}}\end{minipage}
+		\begin{minipage}[c]{0.3\textwidth}{\includegraphics[width=\textwidth]{fig/exemplo_arestas_ruim1.png}}\end{minipage}
 	}
 	\qquad
 	\subfloat[Modelo 01: Melhoria realizada na arestas previamente selecionadas.]
 	{\label{fig:melhoria_arestas_faces_bom1}
-		\begin{minipage}[c]{0.4\textwidth}{\includegraphics[width=\textwidth]{fig/exemplo_arestas_bom1.png}}\end{minipage}
+		\begin{minipage}[c]{0.3\textwidth}{\includegraphics[width=\textwidth]{fig/exemplo_arestas_bom1.png}}\end{minipage}
 	}
 	
 	\subfloat[Modelo 02: Arestas selecionadas inicialmente.]
 	{\label{fig:melhoria_arestas_faces_ruim2}
-		\begin{minipage}[c]{0.4\textwidth}{\includegraphics[width=\textwidth]{fig/exemplo_arestas_ruim2.png}}\end{minipage}
+		\begin{minipage}[c]{0.3\textwidth}{\includegraphics[width=\textwidth]{fig/exemplo_arestas_ruim2.png}}\end{minipage}
 	}    
 	\qquad
 	\subfloat[Modelo 02: Melhoria realizada na arestas previamente selecionadas.]
 	{\label{fig:melhoria_arestas_faces_bom2}
-		\begin{minipage}[c]{0.4\textwidth}{\includegraphics[width=\textwidth]{fig/exemplo_arestas_bom2.png}}\end{minipage}
+		\begin{minipage}[c]{0.3\textwidth}{\includegraphics[width=\textwidth]{fig/exemplo_arestas_bom2.png}}\end{minipage}
 	}
 	\caption{Seleção do ciclo de arestas (em vermelho) com e sem melhoria.}
 	\label{fig:melhoria_arestas_faces}
@@ -411,12 +411,12 @@ Se a quantidade de tarefas e processadores forem iguais, cada processador recebe
 	\centering    
 	\subfloat[Processador $P1$ será o responsável por fazer a junção da malha vermelha e azul.]
 	{\label{fig:balanceamento_esfera1}
-		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/balanceamento1.png}}\end{minipage}
+		\begin{minipage}[c]{0.3\textwidth}{\includegraphics[width=\textwidth]{fig/balanceamento1.png}}\end{minipage}
 	}
 	\qquad
 	\subfloat[Processador $P2$ será o responsável por fazer a junção da malha azul e verde.]
 	{\label{fig:balanceamento_esfera2}
-		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/balanceamento2.png}}\end{minipage}
+		\begin{minipage}[c]{0.3\textwidth}{\includegraphics[width=\textwidth]{fig/balanceamento2.png}}\end{minipage}
 	}
 	\caption{Etapas do balanceamento de tarefas entre os processadores para o moledo da Figura \ref{fig:celulas_selecionadas2d}.}
 	\label{fig:balanceamento_esfera}
@@ -425,9 +425,9 @@ Se a quantidade de tarefas e processadores forem iguais, cada processador recebe
 
 \subsection{Geração da Malha}
 
-Cada processador tem a possibilidade de aplicar algoritmos diferentes se desejado, podendo aplicar qualquer técnica de geração de malha que respeite os pré-requisitos citados no início desta seção. Foi selecionado uma técnica de Avanço de Fronteira para realizar os testes.
+Cada processador tem a possibilidade de aplicar algoritmos diferentes se desejado, podendo se aplicado qualquer técnica de geração de malha que respeite os pré-requisitos citados no início deste capítulo. Foi selecionado uma técnica de Avanço de Fronteira para realizar os testes.
 
-O algoritmo de Avanço de Fronteira utilizado foi desenvolvido em \cite{bib:Miranda99} e \cite{bib:Cavalcante-Neto01}. Estruturas de dados geométricas foram utilizadas para acelerar a busca por vértices candidatos para a geração de um novo triângulo e para a busca de possíveis arestas intersectantes, garantindo uma rápida execução do procedimento de geração de malha.
+O algoritmo de Avanço de Fronteira utilizado foi desenvolvido em \cite{bib:Miranda99} e \cite{bib:Cavalcante-Neto01}. Foram utilizadas estruturas de dados geométricas para acelerar a busca por vértices candidatos para a geração de um novo triângulo e para a busca de possíveis arestas intersectantes, garantindo uma rápida execução do procedimento de geração de malha.
 
 O processo de geração de malha consiste em três etapas. A primeira é baseada na geometria, tentando gerar elementos de boa qualidade mantendo a validade da malha. A segunda é baseada na topologia, buscando apenas gerar elementos válidos, mesmo eles não sendo de boa qualidade. A ultima fase é a de geração por retrocesso (\textit{back-tracking}), que tenta finalizar a geração da malha nas áreas onde não foi possível realizar o avanço de fronteira. Vale lembrar que nos casos tridimensionais nem sempre existe uma solulção para a geração da malha.
 
@@ -438,25 +438,96 @@ Na versão bidimensional da tecnica as duas primeiras fases são suficientes par
 	\centering
 	\subfloat[Cavidade em cinza.]
 	{\label{fig:melhoria_arestas_faces_ruim1}
-		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking1.png}}\end{minipage}
+		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking1.png}}\end{minipage}
 	}
 	\qquad
 	\subfloat[Teste de visibilidade sendo feito com o centroide (em azul) e suas arestas de teste.]
 	{\label{fig:melhoria_arestas_faces_bom1}
-		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking2.png}}\end{minipage}
+		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking2.png}}\end{minipage}
 	}
 	
 	\subfloat[Cavidade após remoção de um elemento.]
 	{\label{fig:melhoria_arestas_faces_ruim2}
-		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking3.png}}\end{minipage}
+		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking3.png}}\end{minipage}
 	}    
 	\qquad
 	\subfloat[Malha final, ligada ao centroide, após o retrocesso ser aplicado.]
 	{\label{fig:melhoria_arestas_faces_bom2}
-		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking4.png}}\end{minipage}
+		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/backtracking4.png}}\end{minipage}
 	}
 	\caption{Geração de malhas por retrocesso.}
 	\label{fig:melhoria_arestas_faces}
+\end{figure}
+
+
+O processo de geração de malha é complementado com algumas melhorias. Ao todo são três etapas de melhorias, duas delas são modificações na topologia e a outra na geometria. As fases topologicas são a troca de faces (\textit{face swapping}) e a troca de arestas (\textit{edge swapping}), representadas nas Figuras \ref{fig:face_swapping} e \ref{fig:edge_swapping} respectivamente.
+
+
+\begin{figure}[!ht]
+	
+	\centering
+	\subfloat[Tetraedros adjacentes à face (1, 2, 3).]
+	{\label{fig:face_swapping2}
+	\begin{minipage}[c]{0.35\textwidth}\centering\includegraphics{fig/markos/face_swapping2.pdf}\end{minipage}}	
+	\qquad	
+	\subfloat[Tetraedros após a troca de faces ser realizada.]
+	{\label{fig:face_swapping3}
+	\begin{minipage}[c]{0.35\textwidth}\centering\includegraphics{fig/markos/face_swapping3.pdf}\end{minipage}}
+	
+	\caption{Troca de faces.}
+	
+	\label{fig:face_swapping}
+	
+\end{figure}
+
+
+\begin{figure}[!ht]
+	
+	\centering
+	\subfloat[Tetraedros adjacentes à aresta (1, 2).]
+	{\label{fig:edge_swapping2}
+	\begin{minipage}[c]{0.35\textwidth}\centering\includegraphics[scale=1.3]{fig/markos/edge_swapping3.pdf}\end{minipage}}
+	\qquad	
+	\subfloat[Tetraedros após a troca.]
+	{\label{fig:edge_swapping3}
+	\begin{minipage}[c]{0.35\textwidth}\centering\includegraphics[scale=1.3]{fig/markos/edge_swapping4.pdf}\end{minipage}}	
+	\caption{Troca de arestas, com três tetraedros adjacentes (caso inverso à troca de faces).}	
+	\label{fig:edge_swapping}
+	
+\end{figure}
+
+
+Na fase geometrica é aplicada uma suavização de Laplace, onde os vértices internos da malha são movidos caso os elementos suavizados sejam melhores que o pior elemento antes da suavização. Esta suavização consiste em mover um vértice interno da malha de tal forma que ele se aproxime do centroide do poligono definido pelos seus vértices adjacentes, seguindo a Equação \ref{eq:laplace}. 
+
+
+\begin{equation}
+X_V^{n+1} = X_V^{n} + \phi \frac{\sum_{i=1}^m (X_i^n - X_V^n)}{m}
+\label{eq:laplace}
+\end{equation}
+
+
+Nessa equação, $X_V^{n}$ é a posição do vértice $V$ na iteração de suavização $n$, $m$ é o número de vértices adjacentes a $V$ por algum tetraedro. $i$ corresponte o i-ésimo vértice adjacente a $V$, $X_V^{n}$ é a posição do i-ésimo vértice adjacente a V na iteração de suavização $n$, e $\phi$ é o parâmetro de relaxamento, normalmente ajustado para um valor entre 0 e 1 (neste trabalho, o valor de $1$ foi utilizado para $\phi$). A Figura \ref{fig:laplace} ilustra como a suavização é feita para $\phi=1,0$.
+
+
+
+\begin{figure}[!ht]
+	\centering
+	\subfloat[Poligono formado pelos vértices adjacentes a $V$ (em vermelho).]
+	{\label{fig:laplace1}
+		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/laplace1.png}}\end{minipage}
+	}
+	\qquad
+	\subfloat[Centroide do poligono em azul.]
+	{\label{fig:laplace2}
+		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/laplace2.png}}\end{minipage}
+	}
+	\qquad	
+	\subfloat[Resultado final da suavização de Laplace.]
+	{\label{fig:laplace3}
+		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/laplace3.png}}\end{minipage}
+	}    
+	\caption{Suavização de Laplace feita para $\phi=1,0$.}
+	\label{fig:laplace}
 \end{figure}
 
 
