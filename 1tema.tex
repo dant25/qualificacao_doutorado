@@ -55,7 +55,7 @@ Após a criação de todos subdomínios, o balanceamento de carga é feito caso 
 \end{figure}
 
 
-\subsection{Estimativa de Carga} 
+\section{Estimativa de Carga} 
 \label{sec:Estimativa_de_Carga}
 
 Em Computação de Alto Desempenho (CAD), a carga é uma medida da quantidade de trabalho a ser realizado em um subdomínio ou um conjunto de subdomínios. Em problemas de geração de malha, a carga está relacionada com o número de elementos que serão gerados em cada subdomínio. Portanto, a carga está relacionada com as seguintes questões, que devem ser levadas em conta em sua estimativa (Figuras~\ref{fig:malha_norma_refinada} e~\ref{fig:malha_uniforme_não_uniforme}):
@@ -98,7 +98,7 @@ Em Computação de Alto Desempenho (CAD), a carga é uma medida da quantidade de
 
 A malha da direita da Figura~\ref{fig:malha_norma_refinada} sugere uma carga maior que a malha da esquerda da mesma figura. A mesma discretização de borda foi utilizada nos dois casos. Na Figura~\ref{fig:malha_uniforme_não_uniforme}, a carga associada às regiões cercadas por linhas contínuas é maior que a carga associada às regiões cercadas por linhas tracejadas.
 
-\subsubsection{Estrutura de Estimativa de Carga}
+\subsection{Estrutura de Estimativa de Carga}
 
 Para estimar a carga de um modelo dado como entrada é utilizado uma \textit{quadtree}, caso seja bidimensional, ou uma \textit{octree}, caso seja tridimensional. As mesmas regras de criação da \textit{quadtree} se aplicam na \textit{octree}, sendo assim, por ser mais simples de representar e entender, será explicado todo o processo usando como base a \textit{quadtree}.
 
@@ -135,7 +135,7 @@ O segundo refinamento, também conhecido na literatura como refinamento 2:1, é 
     \end{figure}
 
 
-\subsubsection{Classificação das Células}
+\subsection{Classificação das Células}
 
 Uma classificação das células da \textit{quadtree} de densidade contribui para otimizar buscas e para evitar o desperdício de memória. Pode-se classificar uma célula como interna (caso a célula esteja totalmente interna ao domínio), externa (caso a célula esteja totalmente externa ao domínio) ou sobre a fronteira do domínio (caso a célula faça interseção com alguma aresta ou vértice do domínio). O algoritmo de classificação é mostrado em \cite{bib:Freitas10}. A Figura \ref{fig:classificacao} mostra as células de uma \textit{quadtree} de densidade classificadas para um dado domínio circular, onde as cores atribuídas às células indicam a sua classificação (células verdes - dentro do domínio, células vermelhas - fora do domínio, células amarelas - sobre a fronteira).
 
@@ -147,17 +147,17 @@ Uma classificação das células da \textit{quadtree} de densidade contribui par
 \end{figure}
 
 
-\subsubsection{Cálculo da Carga}
+\subsection{Cálculo da Carga}
 
 A \textit{quadtree} de densidade é utilizada para fazer uma estimativa da carga neste trabalho. Com a sua construção é possível ter noção do tamanho dos elementos pertencentes ao domínio do objeto. Assim, uma ideia geral sobre a malha desejada é conhecida desde o início. A classificação das células folhas da \textit{quadtree} de densidade é utilizada para selecionar apenas as células que não estão fora do domínio de entrada, ou seja, as células que estão no interior do domínio e as que interceptam a borda (células verdes e amarelas na Figura \ref{fig:classificacao}). A quantidade dessas folhas não externas é considerada como a carga total para este domínio.
 
-\subsection{Decomposição do Domínio}\label{sec:Decomposicao_dominio}
+\section{Decomposição do Domínio}\label{sec:Decomposicao_dominio}
 
 A técnica proposta neste trabalho tem apenas um pré-requisito quanto à estrutura de decomposição espacial para particionar o domínio dado como entrada. A estrutura de decomposição deve gerar regiões que sejam paralelas às células da \textit{quadtree} de densidade. Estruturas baseadas em árvore como \textit{quadtree}, \textit{octree}, BSP e \textit{Kd-tree} geram regiões que possibilitam a perfeita execução do algoritmo de geração dos subdomínios.
 
 Vale lembrar que para um bom particionamento é preciso uma boa estimativa de carga e para se obter uma malha de boa qualidade depende-se de um bom particionamento do domínio. Para gerar exemplos e até mesmo para comparar os resultados dos diferentes tipos de estruturas de dados, esta seção descreve como é feita a criação de uma \textit{quadtree} e de uma BSP para decompor a entrada.
 
-\subsubsection{Decomposição utilizando BSP}
+\subsection{Decomposição Utilizando BSP}
 
 Uma excelente estrutura de particionamento é a BSP, aqui chamada de BSP de decomposição, tendo a sua criação guiada pela estrutura de estimativa de carga descrita anteriormente na Seção~\ref{sec:Estimativa_de_Carga}. A utilização desta estrutura foi baseada no trabalho de \cite{bib:RepMarkos13}, onde mais detalhes da construção e implementação podem ser encontrados nele. A BSP de decomposição pode ser construída de diversas formas, dependendo apenas do critério de subdivisão:
 
@@ -239,13 +239,13 @@ Nos casos que o número de partições desejado seja ímpar, é aplicado um valo
 	\label{fig:circunferencia_cortejunto}
 \end{figure}
 
-\subsection{Criação das Interfaces}
+\section{Interfaces dos Subdomínios}
 
 Na geração das interfaces dos subdomínios, é necessário ter a estrutura de estimativa de carga( uma \textit{quadtree} no caso bidimensional e uma \textit{octree} no caso tridimensional) e a estrutura de particionamento devidamente criadas(a BSP). Qualquer outra estrutura de decomposição espacial que gere regiões paralelas aos eixos pode ser utilizada nessa técnica de geração de subdomínios. 
 
-Pode-se dizer que para construir as interfaces dos subdomínios é necessário possuir uma grade de suporte e os elementos do modelo de entrada em que a partição faz interseção.
+Para construir a interface dos subdomínios é necessário possuir uma grade de suporte e os elementos do modelo de entrada em que a partição faz interseção. A grade de suporte irá guiar a a criação do elementos da interface, sendo ela responsável pelo tamanho e posicionamento dos mesmos. Os elementos do modelo que fazem interseção com a partição são necessários para fazer a junção da interface com o modelo, de tal modo que ao final não exista nenhum buraco na interface.
 
-\subsubsection{Grade de suporte}
+\subsection{Grade de Suporte}
 
 Para cada corte da estrutura de particionamento é feito a interseção com as células folhas da estrutura de estimativa de carga (Figura \ref{fig:celulas_selecionadas2d_tree} para o caso bidimensional e Figura \ref{fig:celulas_selecionadas3d_tree} para o caso tridimensional). Como resultado dessa interseção, é obtido um conjunto de células da estrutura de estimativa de carga que cruzam ou apenas tangenciam a partição que se deseja criar. Essas células guiarão a criação das fronteiras dos seus respectivos subdomínios (células em azul nas Figuras \ref{fig:celulas_selecionadas2d_particoes} e \ref{fig:celulas_selecionadas3d_particoes}). A estrutura de estimativa de carga possui informações de tamanho, que são baseadas nas arestas da borda, essas informações ajudam na criação da malha de interface compatível com a discretização do domínio.
 
@@ -322,7 +322,7 @@ No caso bidimensional a grade de suporte é apenas um conjunto de pontos, já no
      \end{figure}
      
         
-\subsubsection{Elementos de Interseção}
+\subsection{Elementos de Interseção}
 
 Algumas partições estarão sobre a fronteira do domínio e alguns de seus elementos terão que se conectar à esta fronteira. O caso bidimensional é simples quando comparado ao caso tridimensional.
 
@@ -386,14 +386,131 @@ O critério de seleção inicial das arestas é obter todas as arestas que inter
 
 A melhoria do ciclo de arestas é feito visando melhorar o angulo entre as arestas, consequentemente melhorará a malha de interface que será gerada. Para cada par de arestas vizinhas é feito uma verificação se existe uma face que contém estas duas arestas, se existir e o angulo entre as arestas melhorar, estas duas arestas serão removidas e será adicionada a outa aresta da face encontrada. Um exemplo pode ser visto da Figura \ref{fig:melhoria_arestas_faces} onde é possível ver as mudanças que ocorreram quando a melhoria foi realizada.
 
-\subsection{Balanceamento da Carga}
+\subsection{Geração da Interface Bidimensional}
+
+No caso bidimensional as arestas da interface são criadas seguindo a grade de pontos encontrada anteriormente. É necessário realizar a junção dessas arestas com o modelo, para isto é feito uma busca nos vértices que fazem interseção com a partição. O vértice que formar o maior angulo com a interface será o candidato para realizar a junção da interface com o modelo. Ao final desse processo cada partição terá sua fronteira construída e estará pronta para geração da malha.
+
+
+\subsubsection{Teste de Proximidade}
+\label{sec:Teste_proximidade}
+
+Um dos problemas de se utilizar estruturas que geram regiões paralelas aos eixos para particionar domínios é a possibilidade das partições estarem posicionadas em regiões onde os elementos a serem gerados sejam de má qualidade ou até mesmo em posições em que não é possível gerar elementos (a Figura \ref{fig:teste_prox1} mostra um caso da partição estar muito próxima da fronteira). 
+
+
+\begin{figure}[ht]
+	\centering
+	\subfloat[Caso em que o tratamento de proximidade é realizado.]
+	{\label{fig:teste_prox1}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/teste_prox1.png}}\end{minipage}
+	}
+	\qquad
+	\subfloat[Busca pelo vértice da fronteira que forma o maior angulo entre os candidatos.]
+	{\label{fig:teste_prox2}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/teste_prox2.png}}\end{minipage}
+	}
+	
+	\subfloat[Aresta criada pelo teste de proximidade.]
+	{\label{fig:teste_prox_fim}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/teste_prox_fim.png}}\end{minipage}
+	}    
+	\qquad
+	\subfloat[Aresta que seria criada caso o teste de proximidade não fosse realizado.]
+	{\label{fig:teste_prox_error}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/teste_prox_error.png}}\end{minipage}
+	}
+	\caption{Possíveis casos no teste de proximidade.}
+	\label{fig:teste_prox}
+\end{figure}
+
+
+A busca pelo vértice da fronteira mais próximo que intercepta a partição não garante a qualidade do subdomínio criado, pois, dependendo do refinamento da entrada e do posicionamento do corte da partição, o melhor vértice pode ter uma posição ruim para gerar malha. Se estes casos não forem tratados, o algoritmo de geração da malha possivelmente falhará ou gerará elementos de baixa qualidade.
+
+Para tratar os casos citados, foram implementados testes de proximidade que utilizam as informações das células da estrutura de estimativa de carga. Com esses testes a qualidade da malha melhora além de se evitar possíveis erros na geração da malha.
+
+O teste de proximidade é realizado quando a partição que está sendo criada utiliza uma célula da estrutura de estimativa de carga que intercepta a fronteira de entrada. Se isto ocorrer, será feita uma verificação se a célula da estrutura de estimativa de carga que está sendo testada é classificada como \textbf{sobre} a fronteira do domínio. Em caso afirmativo, será realizada uma busca pelo melhor vértice da fronteira que faz o maior angulo (Figura \ref{fig:teste_prox2}, onde entre as arestas $a$ e $c$, a melhor será $a$). Se o comprimento desta aresta for menor que o lado $b$ da célula da estrutura estimativa de carga que está sendo utilizada, será gerada a aresta que liga os dois vértices (Figura \ref{fig:teste_prox_fim}). Caso contrário, será criado um novo vértice segundo as informações da grade de suporte.
+
+Esse teste é baseado na ideia de que para um bom elemento ser gerado ele precisa de uma área mínima. Neste trabalho é assumido que esta distância mínima deve ser o tamanho da célula da \textit{quadtree} de estimativa de carga para o caso bidimensional. Com este teste evita-se a criação de arestas com ângulos muito pequenos (Figura \ref{fig:teste_prox_error}) e melhora a qualidade dos elementos que serão gerados.
+
+Esse mesmo teste se aplica a outros casos; um deles é quando a célula da partição tem uma região da sua célula tangente à fronteira de entrada, como mostrado na esquerda da Figura~\ref{fig:teste_prox_passos2}. Neste caso o teste de proximidade será efetuado várias vezes de tal forma que a medida que as arestas vão entrando no teste de proximidade, a região que está muito próxima da borda é transferida para a partição vizinha. Como consequência disso, parte da malha que seria gerada por um processador, será agora tratada pelo vizinho.
+
+
+\begin{figure}[!ht]
+	\centering
+	\subfloat[Célula da estrutura de particionamento (em vermelho) juntamente com a borda de entrada.]
+	{\label{fig:teste_prox_passos1}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/prox_1.png}}\end{minipage}
+	}
+	\qquad
+	\subfloat[Arestas em azul entram no teste de proximidade.]
+	{\label{fig:teste_prox_passos2}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/prox_2.png}}\end{minipage}
+	}    
+	
+	\subfloat[Após o teste de proximidade ser aplicado, o subdomínio azul fica responsável pela região onde as arestas falharam nos testes.]
+	{\label{fig:teste_prox_passos3}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/prox_3.png}}\end{minipage}
+	}    
+	\qquad
+	\subfloat[Subdomínios que seriam gerados sem a realização dos testes de proximidade.]
+	{\label{fig:teste_prox_passos4}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/prox_4.png}}\end{minipage}
+	}    
+	\caption{Modificações nas regiões realizadas pelo teste de proximidade para evitar elementos ruins.}
+	\label{fig:teste_prox_passos}
+\end{figure}
+
+
+\subsubsection{Tratamento de Buracos}
+\label{sec:Tratamento_buracos}
+
+Alguns modelos possuem buracos em seus domínios, e, nesses casos, é preciso realizar um teste simples para evitar que sejam criadas arestas que atravessem a fronteira. Esse tratamento é realizado apenas quando uma partição da BSP intercepta algum buraco do modelo.
+
+Quando se tem um buraco que intercepta a partição que está sendo criada, existirão células classificadas como fora da partição entre as que estão classificadas como dentro ou que cruzam a fronteira. O algoritmo tentará gerar uma aresta entre duas células classificadas como internas, mas essa aresta irá cruzar células classificadas como externas ao domínio. 
+
+\begin{figure}[!ht]
+	\centering
+	\subfloat[Célula da estrutura de particionamento (em vermelho) juntamente com a borda de entrada que contém um buraco.]
+	{\label{fig:teste_prox_buraco_passos1}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/buraco_1.png}}\end{minipage}
+	}
+	\qquad
+	\subfloat[Detecta-se que arestas que seria criada de $a$ para $b$ passa por um buraco.]
+	{\label{fig:teste_prox_buraco_passos2}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/buraco_2.png}}\end{minipage}
+	}    
+	\caption{Passos feitos nos tratamentos de buracos.}
+	\label{fig:teste_prox_buraco_passos}
+\end{figure}
+
+\begin{figure}[!ht]
+	\ContinuedFloat
+	\centering    
+	\subfloat[Teste feito para selecionar a melhor aresta para $a$.]
+	{\label{fig:teste_prox_buraco_passos3}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/buraco_3.png}}\end{minipage}
+	}    
+	\qquad
+	\subfloat[Teste feito para selecionar a melhor aresta para $b$.]
+	{\label{fig:teste_prox_buraco_passos4}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/buraco_4.png}}\end{minipage}
+	}    
+	\caption{Passos feitos nos tratamentos de buracos (continuação).}
+\end{figure}
+
+Quando é detectada uma possível colisão de uma aresta com células externas, serão criadas duas arestas em vez de uma. A primeira conecta o último vértice criado ao vértice mais próximo da primeira interseção do buraco com a partição da BSP (Figura \ref{fig:teste_prox_buraco_passos3}), e a segunda liga o vértice mais próximo da segunda interseção com o buraco a um vértice que será criado de acordo com a grade de suporte (Figura \ref{fig:teste_prox_buraco_passos4}).
+
+\subsection{Geração da Interface Tridimensional}
+
+???
+
+\section{Balanceamento da Carga}
 
 
 Após todos os subdomínios estarem devidamente criados, eles devem ser distribuídos entre os processadores disponíveis para que as submalhas sejam geradas por alguma técnica de geração de malha. Essa distribuição das tarefas deve ser feita de tal forma que todos os processadores gastem a mesma quantidade de tempo, evitando que algum processador fique sobrecarregado ou ocioso.
 
 De acordo com o modo que o domínio é particionado, pode-se ter como resultado diversas tarefas para serem distribuídas (caso o número de tarefas seja maior que o de processadores) ou então ter a mesma quantidade de tarefas e processadores. O número de tarefas é o mesmo de folhas da BSP de particionamento, por isso uma estratégia de balanceamento não-centralizado que utiliza uma BSP para balancear a carga é utilizada neste trabalho.
 
-O balanceamento de carga é feito a medida que novos cortes são feitos domínio. Inicialmente um único processador é responsavel por realizar o primeiro corte, após isso, novos processadores irão sendo ativados para continuar o particionamento. Ao final do particionamento todos os processadores já estarão com os seus respectivos subdomínios. A Figura \ref{fig:arvore_balanceamento} mostra a árvore resultante para o balanceamento do modelo da Figura \ref{fig:celulas_selecionadas2d}.
+O balanceamento de carga é feito a medida que novos cortes são feitos domínio. Inicialmente um único processador é responsável por realizar o primeiro corte, após isso, novos processadores irão sendo ativados para continuar o particionamento. Ao final do particionamento todos os processadores já estarão com os seus respectivos subdomínios. A Figura \ref{fig:arvore_balanceamento} mostra a árvore resultante para o balanceamento do modelo da Figura \ref{fig:celulas_selecionadas2d}.
 
 
 \begin{figure}[!ht]
@@ -423,15 +540,15 @@ Se a quantidade de tarefas e processadores forem iguais, cada processador recebe
 \end{figure}
 
 
-\subsection{Geração da Malha}
+\section{Geração da Malha}
 
 Cada processador tem a possibilidade de aplicar algoritmos diferentes se desejado, podendo se aplicado qualquer técnica de geração de malha que respeite os pré-requisitos citados no início deste capítulo. Foi selecionado uma técnica de Avanço de Fronteira para realizar os testes.
 
 O algoritmo de Avanço de Fronteira utilizado foi desenvolvido em \cite{bib:Miranda99} e \cite{bib:Cavalcante-Neto01}. Foram utilizadas estruturas de dados geométricas para acelerar a busca por vértices candidatos para a geração de um novo triângulo e para a busca de possíveis arestas intersectantes, garantindo uma rápida execução do procedimento de geração de malha.
 
-O processo de geração de malha consiste em três etapas. A primeira é baseada na geometria, tentando gerar elementos de boa qualidade mantendo a validade da malha. A segunda é baseada na topologia, buscando apenas gerar elementos válidos, mesmo eles não sendo de boa qualidade. A ultima fase é a de geração por retrocesso (\textit{back-tracking}), que tenta finalizar a geração da malha nas áreas onde não foi possível realizar o avanço de fronteira. Vale lembrar que nos casos tridimensionais nem sempre existe uma solulção para a geração da malha.
+O processo de geração de malha consiste em três etapas. A primeira é baseada na geometria, tentando gerar elementos de boa qualidade mantendo a validade da malha. A segunda é baseada na topologia, buscando apenas gerar elementos válidos, mesmo eles não sendo de boa qualidade. A ultima fase é a de geração por retrocesso (\textit{back-tracking}), que tenta finalizar a geração da malha nas áreas onde não foi possível realizar o avanço de fronteira. Vale lembrar que nos casos tridimensionais nem sempre existe uma solução para a geração da malha.
 
-Na versão bidimensional da tecnica as duas primeiras fases são suficientes para gerar a malha triagular. Na versão tridimensional nem sempre as duas primeiras fases conseguem finalizar a malha, por isso é necessário o passo de geração por retrocesso (\textit{back-tracking}). A Figura \ref{fig:melhoria_arestas_faces} ilustra o processo de retrocesso aplicado a uma cavidade.
+Na versão bidimensional da técnica as duas primeiras fases são suficientes para gerar a malha triangular. Na versão tridimensional nem sempre as duas primeiras fases conseguem finalizar a malha, por isso é necessário o passo de geração por retrocesso (\textit{back-tracking}). A Figura \ref{fig:melhoria_arestas_faces} ilustra o processo de retrocesso aplicado a uma cavidade.
 
 
 \begin{figure}[ht]
@@ -460,7 +577,7 @@ Na versão bidimensional da tecnica as duas primeiras fases são suficientes par
 \end{figure}
 
 
-O processo de geração de malha é complementado com algumas melhorias. Ao todo são três etapas de melhorias, duas delas são modificações na topologia e a outra na geometria. As fases topologicas são a troca de faces (\textit{face swapping}) e a troca de arestas (\textit{edge swapping}), representadas nas Figuras \ref{fig:face_swapping} e \ref{fig:edge_swapping} respectivamente.
+O processo de geração de malha é complementado com algumas melhorias. Ao todo são três etapas de melhorias, duas delas são modificações na topologia e a outra na geometria. As fases topológicas são a troca de faces (\textit{face swapping}) e a troca de arestas (\textit{edge swapping}), representadas nas Figuras \ref{fig:face_swapping} e \ref{fig:edge_swapping} respectivamente.
 
 
 \begin{figure}[!ht]
@@ -497,7 +614,7 @@ O processo de geração de malha é complementado com algumas melhorias. Ao todo
 \end{figure}
 
 
-Na fase geometrica é aplicada uma suavização de Laplace, onde os vértices internos da malha são movidos caso os elementos suavizados sejam melhores que o pior elemento antes da suavização. Esta suavização consiste em mover um vértice interno da malha de tal forma que ele se aproxime do centroide do poligono definido pelos seus vértices adjacentes, seguindo a Equação \ref{eq:laplace}. 
+Na fase geométrica é aplicada uma suavização de Laplace, onde os vértices internos da malha são movidos caso os elementos suavizados sejam melhores que o pior elemento antes da suavização. Esta suavização consiste em mover um vértice interno da malha de tal forma que ele se aproxime do centroide do polígono definido pelos seus vértices adjacentes, seguindo a Equação \ref{eq:laplace}. 
 
 
 \begin{equation}
@@ -506,18 +623,18 @@ X_V^{n+1} = X_V^{n} + \phi \frac{\sum_{i=1}^m (X_i^n - X_V^n)}{m}
 \end{equation}
 
 
-Nessa equação, $X_V^{n}$ é a posição do vértice $V$ na iteração de suavização $n$, $m$ é o número de vértices adjacentes a $V$ por algum tetraedro. $i$ corresponte o i-ésimo vértice adjacente a $V$, $X_V^{n}$ é a posição do i-ésimo vértice adjacente a V na iteração de suavização $n$, e $\phi$ é o parâmetro de relaxamento, normalmente ajustado para um valor entre 0 e 1 (neste trabalho, o valor de $1$ foi utilizado para $\phi$). A Figura \ref{fig:laplace} ilustra como a suavização é feita para $\phi=1,0$.
+Nessa equação, $X_V^{n}$ é a posição do vértice $V$ na iteração de suavização $n$, $m$ é o número de vértices adjacentes a $V$ por algum tetraedro. $i$ corresponde o i-ésimo vértice adjacente a $V$, $X_V^{n}$ é a posição do i-ésimo vértice adjacente a V na iteração de suavização $n$, e $\phi$ é o parâmetro de relaxamento, normalmente ajustado para um valor entre 0 e 1 (neste trabalho, o valor de $1$ foi utilizado para $\phi$). A Figura \ref{fig:laplace} ilustra como a suavização é feita para $\phi=1,0$.
 
 
 
 \begin{figure}[!ht]
 	\centering
-	\subfloat[Poligono formado pelos vértices adjacentes a $V$ (em vermelho).]
+	\subfloat[Polígono formado pelos vértices adjacentes a $V$ (em vermelho).]
 	{\label{fig:laplace1}
 		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/laplace1.png}}\end{minipage}
 	}
 	\qquad
-	\subfloat[Centroide do poligono em azul.]
+	\subfloat[Centroide do polígono em azul.]
 	{\label{fig:laplace2}
 		\begin{minipage}[c]{0.25\textwidth}{\includegraphics[width=\textwidth]{fig/laplace2.png}}\end{minipage}
 	}
@@ -531,7 +648,7 @@ Nessa equação, $X_V^{n}$ é a posição do vértice $V$ na iteração de suavi
 \end{figure}
 
 
-\subsection{Junção e Finalização da Malha}
+\section{Junção e Finalização da Malha}
 
 
 \section{Conclusão}
