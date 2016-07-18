@@ -504,6 +504,7 @@ Quando é detectada uma possível colisão de uma aresta com células externas, 
 ???
 
 \section{Balanceamento da Carga}
+\label{sec:Balanceamento_de_Carga}
 
 
 Após todos os subdomínios estarem devidamente criados, eles devem ser distribuídos entre os processadores disponíveis para que as submalhas sejam geradas por alguma técnica de geração de malha. Essa distribuição das tarefas deve ser feita de tal forma que todos os processadores gastem a mesma quantidade de tempo, evitando que algum processador fique sobrecarregado ou ocioso.
@@ -541,6 +542,7 @@ Se a quantidade de tarefas e processadores forem iguais, cada processador recebe
 
 
 \section{Geração da Malha}
+\label{sec:Geracao_da_Malha}
 
 Cada processador tem a possibilidade de aplicar algoritmos diferentes se desejado, podendo se aplicado qualquer técnica de geração de malha que respeite os pré-requisitos citados no início deste capítulo. Foi selecionado uma técnica de Avanço de Fronteira para realizar os testes.
 
@@ -649,6 +651,35 @@ Nessa equação, $X_V^{n}$ é a posição do vértice $V$ na iteração de suavi
 
 
 \section{Junção e Finalização da Malha}
+
+A junção da malha é feita seguindo a estrutura da BSP de particionamento de baixo para cima. Cada nó da árvore da BSP corresponde a um processador. A junção das malhas é realizada sempre que dois nós irmãos acabam a fase de geração de malha, um dos processadores ficará responsável pelo processamento e o outro será liberado. A alocação das tarefas foi previamente feita conforme explicado na Seção \ref{sec:Balanceamento_de_Carga}. A Figura \ref{fig:arvore_juncao} mostra a árvore BSP para 8 partições, cada partição é atribuída a um processador.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{fig/arvore.png}
+	\caption{Árvore da BSP de particionamento usada na junção das partições. Em cada nó é mostrado o processador responsável pela geração da malha ou da sua junção/melhoria.}
+	\label{fig:arvore_juncao}
+\end{figure}
+
+
+A finalização da malha é feita logo após a junção dos subdomínios e consiste em melhorias como as descritas na Seção \ref{sec:Geracao_da_Malha}. As melhorias são aplicadas nas interfaces dos subdomínios juntamente com certas camadas de elementos adjacentes a elas. A Figura \ref{fig:finaliza} mostra um mesmo modelo bidimensional com e sem as melhorias nas interfaces.
+
+\begin{figure}[!ht]
+	\centering
+	\subfloat[Junção das malhas geradas nos diversos processadores.]
+	{\label{fig:finaliza1}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/finaliza1.png}}\end{minipage}
+	}
+	\qquad
+	\subfloat[Malha resultante depois do último refinamento.]
+	{\label{fig:finaliza2}
+		\begin{minipage}[c]{0.35\textwidth}{\includegraphics[width=\textwidth]{fig/finaliza2.png}}\end{minipage}
+	}
+	\caption{Finalização da malha: junção das malhas geradas pelos processadores (à esquerda) e malha refinada final (à direita).}
+	\label{fig:finaliza}
+\end{figure}
+
+A melhoria da malha é feita na região onde a malha de interface foi construída, juntamente com algumas camadas de elementos adjacentes. Essas camadas são os elementos adjacentes à malhas de interface. Foi verificado em \cite{bib:Ito07} que duas camadas de elementos são suficientes para se obter uma boa malha ao final. A camada $0$ consiste dos próprios segmentos da fronteira, e a camada $N$ compreende os elementos presentes na camada $N-1$ mais seus elementos adjacentes. Depois dessa etapa, a malha está completamente gerada em todo o modelo.
 
 
 \section{Conclusão}
