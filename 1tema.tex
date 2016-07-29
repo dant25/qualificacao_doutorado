@@ -246,6 +246,7 @@ Na geração das interfaces dos subdomínios, é necessário ter a estrutura de 
 Para construir a interface dos subdomínios é necessário possuir uma grade de suporte e os elementos do modelo de entrada em que a partição faz interseção. A grade de suporte irá guiar a a criação do elementos da interface, sendo ela responsável pelo tamanho e posicionamento dos mesmos. Os elementos do modelo que fazem interseção com a partição são necessários para fazer a junção da interface com o modelo, de tal modo que ao final não exista nenhum buraco na interface.
 
 \subsection{Grade de Suporte}
+\label{sec:Grade_Suporte}
 
 Para cada corte da estrutura de particionamento é feito a interseção com as células folhas da estrutura de estimativa de carga (Figura \ref{fig:celulas_selecionadas2d_tree} para o caso bidimensional e Figura \ref{fig:celulas_selecionadas3d_tree} para o caso tridimensional). Como resultado dessa interseção, é obtido um conjunto de células da estrutura de estimativa de carga que cruzam ou apenas tangenciam a partição que se deseja criar. Essas células guiarão a criação das fronteiras dos seus respectivos subdomínios (células em azul nas Figuras \ref{fig:celulas_selecionadas2d_particoes} e \ref{fig:celulas_selecionadas3d_particoes}). A estrutura de estimativa de carga possui informações de tamanho, que são baseadas nas arestas da borda, essas informações ajudam na criação da malha de interface compatível com a discretização do domínio.
 
@@ -323,6 +324,7 @@ No caso bidimensional a grade de suporte é apenas um conjunto de pontos, já no
      
         
 \subsection{Elementos de Interseção}
+\label{sec:Elementos_Intersecao}
 
 Algumas partições estarão sobre a fronteira do domínio e alguns de seus elementos terão que se conectar à esta fronteira. O caso bidimensional é simples quando comparado ao caso tridimensional.
 
@@ -501,7 +503,26 @@ Quando é detectada uma possível colisão de uma aresta com células externas, 
 
 \subsection{Geração da Interface Tridimensional}
 
-???
+A interface tridimensional corresponde a uma superfície, sendo a sua fronteira os elementos de interseção mostrado em \ref{sec:Elementos_Intersecao}. A criação desta superfície é feita com a ajuda do algoritmo descrito em \cite{bib:miranda2009surface}. A entrada deste algoritmo é a fronteira da superfície e uma grade de suporte para guiar a criação dos elementos. A grade de suporte utilizada é descrita em \ref{sec:Grade_Suporte}.
+
+Uma translação na grade de suporte deve ser realizada para que o algoritmo de geração da superfície funcione corretamente. A translação será feita no mesmo eixo $c$ que o plano de corte da BSP foi posicionado. A grade de suporte deverá ser deslocada para que ela esteja no mesmo plano que o centroide dos vértices do conjunto de elementos de interseção (Equação \ref{eq:traslacao_grade}). 
+
+\begin{equation}
+Pos = \frac{\sum_{i=1}^{n} (V_i^c)}{n} \longrightarrow V_i^c = Pos
+\label{eq:traslacao_grade}
+\end{equation}
+
+Na Equação \ref{eq:traslacao_grade} a posição do centroide é $Pos$, $n$ é a quantidade de vértices no conjunto de elementos de interseção $V$, $V_i^c$ representa um vértice na iteração $i$ usando a coordenada $c$, que correspondente ao eixo que o corte da BSP de particionamento foi feito. Ao final, a coordenada $c$ de todos os vértices da grade de suporte será $Pos$.
+
+A malha de interface será gerada por avanço de fronteira, tendo como guia a grade de suporte dada como entrada. Esta grade irá auxiliar na criação de elementos, indicando a posição e o tamanho ideal para os novos vértices e elementos. A Figura \ref{fig:geracao_tridimensional} mostra uma visão geral de como o algoritmo de geração da interface funciona.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{fig/geracao_tridimensional.png}
+	\caption{Etapas para a criação da superfície que será a interface de um subdomínio.}
+	\label{fig:geracao_tridimensional}
+\end{figure}
+
 
 \section{Balanceamento da Carga}
 \label{sec:Balanceamento_de_Carga}
