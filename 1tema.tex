@@ -1,4 +1,4 @@
-\chapter{Tema Principal : Particionamento de malhas \textit{a Priori} para geração em Paralelo de Malhas}\label{tema1}
+\chapter{Tema Principal : Particionamento de Malhas \textit{a Priori} para Geração em Paralelo de Malhas}\label{tema1}
 
 Nesse capítulo é apresentada a técnica \textit{a priori} proposta de subdivisão de domínios para geração de malhas. Ela foi projetada para atender a alguns requisitos:
 
@@ -390,7 +390,15 @@ A melhoria do ciclo de arestas é feito visando melhorar o angulo entre as arest
 
 \subsection{Geração da Interface Bidimensional}
 
-No caso bidimensional as arestas da interface são criadas seguindo a grade de pontos encontrada anteriormente. É necessário realizar a junção dessas arestas com o modelo, para isto é feito uma busca nos vértices que fazem interseção com a partição. O vértice que formar o maior angulo com a interface será o candidato para realizar a junção da interface com o modelo. Ao final desse processo cada partição terá sua fronteira construída e estará pronta para geração da malha.
+No caso bidimensional as arestas da interface são criadas seguindo a grade de pontos encontrada anteriormente. É necessário realizar a junção dessas arestas com o modelo, para isto é feito uma busca nos vértices que fazem interseção com a partição. O vértice que formar o maior angulo com a interface será o candidato para realizar a junção da interface com o modelo. Ao final desse processo cada partição terá sua fronteira construída e estará pronta para geração da malha, como mostra a Figura \ref{fig:subdominios2D_montados}.
+
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.3\textwidth]{fig/subdominios2D_montados.png}
+	\caption{Subdomínios totalmente criados e prontos para a fase de geração de malha.}
+	\label{fig:subdominios2D_montados}
+\end{figure}
 
 
 \subsubsection{Teste de Proximidade}
@@ -521,6 +529,15 @@ A malha de interface será gerada por avanço de fronteira, tendo como guia a gr
 	\includegraphics[width=1.0\textwidth]{fig/geracao_tridimensional.png}
 	\caption{Etapas para a criação da superfície que será a interface de um subdomínio.}
 	\label{fig:geracao_tridimensional}
+\end{figure}
+
+Ao final destes processo cada subdomínios estará completamente criado e pronto para a geração da sua malha interna. A Figura \ref{fig:subdominios_montados} mostra um modelo particionado em dois subdomínios, é possível notar que as duas partições são complementares, onde a união dos dois subdomínios resulta na mesma superfície de entrada.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{fig/subdominios3D_montados.png}
+	\caption{Subdomínios totalmente criados e prontos para a fase de geração de malha.}
+	\label{fig:subdominios3D_montados}
 \end{figure}
 
 
@@ -703,4 +720,8 @@ A finalização da malha é feita logo após a junção dos subdomínios e consi
 A melhoria da malha é feita na região onde a malha de interface foi construída, juntamente com algumas camadas de elementos adjacentes. Essas camadas são os elementos adjacentes à malhas de interface. Foi verificado em \cite{bib:Ito07} que duas camadas de elementos são suficientes para se obter uma boa malha ao final. A camada $0$ consiste dos próprios segmentos da fronteira, e a camada $N$ compreende os elementos presentes na camada $N-1$ mais seus elementos adjacentes. Depois dessa etapa, a malha está completamente gerada em todo o modelo.
 
 
-\section{Conclusão}
+\section{Considerações Finais}
+
+Este capítulo apresentou uma técnica \textit{a priori} para particionamento de malhas para geração em paralelo de malhas. Todos os passos necessários para o entendimento da técnica foram descritos e ilustrados. Este trabalho foi desenvolvido para aceitar entradas bidimensionais ou tridimensionais, podendo-se ainda utilizar qualquer algoritmo para a geração da malha em paralelo.
+
+A grande vantagem deste trabalho é a excelente estimativa de carga feita por uma estrutura de dados espacial; um particionamento nos eixos que busca um corte no modelo que melhor divide a carga entre as partes geradas; e o modelo de criação das interfaces \textit{a priori} que gera subdomínios totalmente independentes, possibilitando assim a utilização de diferentes técnicas de geração de malha com uma baixa comunicação entre as tarefas.
