@@ -1,6 +1,6 @@
 \chapter{Tema Principal : Particionamento de Malhas \textit{a Priori} para Geração em Paralelo de Malhas}\label{tema1}
 
-Nesse capítulo é apresentada a técnica \textit{a priori} proposta de subdivisão de domínios para geração de malhas. Ela foi projetada para atender a alguns requisitos:
+Nesse capítulo é apresentada a técnica \textit{a priori} proposta de subdivisão de domínios para geração de malhas em paralelo. Ela foi projetada para atender a alguns requisitos:
 
 \begin{enumerate}
 	\item Respeitar a fronteira/superfície de entrada, não realizando nenhuma modificação na mesma;
@@ -31,7 +31,7 @@ O quinto requisito diz que a técnica proposta abstrai o tipo de malha e o gerad
 
 O último requisito é também muito importante, já que a velocidade e a qualidade da malha são atualmente um dos principais objetivos de estudo na área da geometria computacional.
 
-É importante observar que, apesar destes trabalho focar na geração de malhas tridimensionais, a técnica paralela é genérica, e funciona tanto para duas quanto para três dimensões. Assim, sempre que for mais didático, o caso bidimensional será utilizado para exemplificar alguns aspectos da técnica.
+É importante observar que, apesar deste trabalho focar na geração de malhas tridimensionais, a técnica paralela é genérica, e funciona tanto para duas quanto para três dimensões. Assim, sempre que for mais didático, o caso bidimensional será utilizado para exemplificar alguns aspectos da técnica.
 
 
 
@@ -45,7 +45,9 @@ Com a árvore de densidade devidamente criada, a estimativa de carga é realizad
 
 O algoritmo de geração das malhas de interfaces dos subdomínios recebe o resultado do particionamento do domínio e cria os novos subdomínios, tendo cada um deles sua interface totalmente compatível com as de seus vizinhos.
 
-Após a criação de todos subdomínios, o balanceamento de carga é feito caso o número de processos criados seja maior que a quantidade de processadores disponíveis para executar a geração da malha. A malha é então gerada em cada um dos subdomínios e ao final é feita uma junção dos pedaços da malha e realizado algumas melhorias. A Figura \ref{fig:fluxograma} mostra o fluxograma de como a técnica procede.
+O balanceamento da carga é feito a medida que as interfaces são criadas, alocando as novas partições para os processadores disponíveis a medida que o particionamento acontece, dessa forma os processadores se tornam responsáveis pela geração da interface dos seus respectivos subdomínios, no caso que o número de tarefas criadas seja maior que a quantidade de processadores disponíveis. 
+
+Por fim a malha é então gerada em cada um dos subdomínios e ao final é feita uma junção dos pedaços da malha e realizado algumas melhorias. A Figura \ref{fig:fluxograma} mostra o fluxograma de como a técnica procede, a parte em azul indica que é realizada em paralelo.
 
 \begin{figure}[!ht]
 	\centering
@@ -65,14 +67,14 @@ Em Computação de Alto Desempenho (CAD), a carga é uma medida da quantidade de
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=1.0\textwidth]{fig/meshes_normal_and_refined.png}
+	\includegraphics[width=0.9\textwidth]{fig/meshes_normal_and_refined.png}
 	\caption{Estimativa de carga para o caso bidimensional: refinamento menor (esquerda) e maior (direita).}
 	\label{fig:malha_norma_refinada}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=1.0\textwidth]{fig/esferas_comp_ref.png}
+	\includegraphics[width=0.9\textwidth]{fig/esferas_comp_ref.png}
 	\caption{Estimativa de carga para o caso tridimensional: refinamento menor (esquerda) e maior (direita).}
 	\label{fig:malha_norma_refinada_trid}
 \end{figure}
@@ -84,14 +86,14 @@ Em Computação de Alto Desempenho (CAD), a carga é uma medida da quantidade de
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=1.0\textwidth]{fig/meshes_transition_and_uniform.png}
+	\includegraphics[width=0.9\textwidth]{fig/meshes_transition_and_uniform.png}
 	\caption{Estimativa de carga para o caso bidimensional: malha uniforme (esquerda) e não-uniforme (direita).}
 	\label{fig:malha_uniforme_não_uniforme}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=1.0\textwidth]{fig/cubes_comp_uniform.png}
+	\includegraphics[width=0.9\textwidth]{fig/cubes_comp_uniform.png}
 	\caption{Estimativa de carga para o caso tridimensional: face de um cubo com malha uniforme (esquerda) e uma face de um cubo com malha não-uniforme (direita).}
 	\label{fig:malha_uniforme_não_uniforme_trid}
 \end{figure}
@@ -155,7 +157,10 @@ A \textit{quadtree} de densidade é utilizada para fazer uma estimativa da carga
 
 A técnica proposta neste trabalho tem apenas um pré-requisito quanto à estrutura de decomposição espacial para particionar o domínio dado como entrada. A estrutura de decomposição deve gerar regiões que sejam paralelas às células da \textit{quadtree} de densidade. Estruturas baseadas em árvore como \textit{quadtree}, \textit{octree}, BSP e \textit{Kd-tree} geram regiões que possibilitam a perfeita execução do algoritmo de geração dos subdomínios.
 
-Vale lembrar que para um bom particionamento é preciso uma boa estimativa de carga e para se obter uma malha de boa qualidade depende-se de um bom particionamento do domínio. Para gerar exemplos e até mesmo para comparar os resultados dos diferentes tipos de estruturas de dados, esta seção descreve como é feita a criação de uma \textit{quadtree} e de uma BSP para decompor a entrada.
+Essa restrição tem a finalidade de preservar o calculo feito na estimativa de carga, já que calcular interseções parciais da partição com as células da estrutura de estimativa de carga para descobrir a fração de carga está interna a partição é pesado computacionalmente.
+
+Vale lembrar que para um bom particionamento é preciso uma boa estimativa de carga e, para se obter uma malha de boa qualidade, depende de um bom particionamento do domínio. Esta seção descreve como é feita a criação de uma BSP para decompor a entrada. Dentre todas as estruturas de dados testada, a BSP, é a que da mais liberdade na criação das partições
+
 
 \subsection{Decomposição Utilizando BSP}
 
@@ -545,11 +550,11 @@ Ao final destes processo cada subdomínios estará completamente criado e pronto
 \label{sec:Balanceamento_de_Carga}
 
 
-Após todos os subdomínios estarem devidamente criados, eles devem ser distribuídos entre os processadores disponíveis para que as submalhas sejam geradas por alguma técnica de geração de malha. Essa distribuição das tarefas deve ser feita de tal forma que todos os processadores gastem a mesma quantidade de tempo, evitando que algum processador fique sobrecarregado ou ocioso.
+A distribuição das tarefas é feita de tal forma para que todos os processadores gastem praticamente a mesma quantidade de tempo na fase de geração de malha, evitando assim que algum processador fique sobrecarregado ou ocioso.
 
-De acordo com o modo que o domínio é particionado, pode-se ter como resultado diversas tarefas para serem distribuídas (caso o número de tarefas seja maior que o de processadores) ou então ter a mesma quantidade de tarefas e processadores. O número de tarefas é o mesmo de folhas da BSP de particionamento, por isso uma estratégia de balanceamento não-centralizado que utiliza uma BSP para balancear a carga é utilizada neste trabalho.
+O número de tarefas gerado é o mesmo de folhas da BSP de particionamento, por isso uma estratégia de balanceamento não-centralizado que utiliza a própria estrutura da BSP para balancear a carga é utilizada neste trabalho.
 
-O balanceamento de carga é feito a medida que novos cortes são feitos domínio. Inicialmente um único processador é responsável por realizar o primeiro corte, após isso, novos processadores irão sendo ativados para continuar o particionamento. Ao final do particionamento todos os processadores já estarão com os seus respectivos subdomínios. A Figura \ref{fig:arvore_balanceamento} mostra a árvore resultante para o balanceamento do modelo da Figura \ref{fig:celulas_selecionadas2d}.
+O balanceamento de carga é feito aproveitando a estrutura da BSP utilizada para fazer o particionamento do domínio dado como entrada. Inicialmente um único processador é responsável por realizar o primeiro corte, após isso, novos processadores irão sendo ativados para continuar a geração das malhas de interfaces. Ao final do particionamento todos os processadores já estarão com os seus respectivos subdomínios criados e prontos para a geração da malha. A Figura \ref{fig:arvore_balanceamento} mostra a árvore resultante para o balanceamento do modelo da Figura \ref{fig:celulas_selecionadas2d}.
 
 
 \begin{figure}[!ht]
@@ -560,7 +565,7 @@ O balanceamento de carga é feito a medida que novos cortes são feitos domínio
 \end{figure}
 
 
-Se a quantidade de tarefas e processadores forem iguais, cada processador receberá uma única tarefa, onde cada tarefa corresponde a uma célula folha da BSP de particionamento. Quando duas células que pertencem a um mesmo nó terminarem de fazer sua computação, um dos processadores dessas células ficará responsável por juntar as duas submalhas e fazer a melhoria na malha resultante. Esse processo é feito para cada par de células que pertence a um mesmo nó da BSP até chegar no nó raiz. A Figura \ref{fig:balanceamento_esfera} ilustra este processo.
+Ao chegar nos nós folhas, o processador que tiver responsável por aquela tarefa fará a geração da malha naquele subdomínio. Se a quantidade de tarefas e processadores forem iguais, cada processador receberá uma única tarefa, onde cada tarefa corresponde a uma célula folha da BSP de particionamento. Quando duas células que pertencem a um mesmo nó terminarem de fazer sua computação, um dos processadores dessas células ficará responsável por juntar as duas submalhas e fazer a melhoria na malha resultante. Esse processo é feito para cada par de células que pertence a um mesmo nó da BSP até chegar no nó raiz. A Figura \ref{fig:balanceamento_esfera} ilustra este processo.
 
 
 \begin{figure}[!ht]
