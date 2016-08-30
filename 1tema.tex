@@ -1,6 +1,6 @@
-\chapter{Tema Principal : Particionamento de Malhas \textit{a Priori} para Geração em Paralelo de Malhas}\label{tema1}
+\chapter{Tema Principal: Particionamento de Malhas \textit{a Priori} para Geração em Paralelo de Malhas}\label{tema1}
 
-Nesse capítulo é apresentada a técnica \textit{a priori} proposta de subdivisão de domínios para geração de malhas em paralelo. Ela foi projetada para atender a alguns requisitos:
+Nesse capítulo é apresentada uma técnica para subdivisão de domínios \textit{a priori} para geração de malhas em paralelo. Ela foi projetada para atender a alguns requisitos:
 
 \begin{enumerate}
 	\item Respeitar a fronteira/superfície de entrada, não realizando nenhuma modificação na mesma;
@@ -29,7 +29,7 @@ De acordo com o quarto requisito, é necessário manter a conformidade da malha 
 
 O quinto requisito diz que a técnica proposta abstrai o tipo de malha e o gerador que será utilizado, contanto que respeite todos os pré-requisitos aqui citados. Isso permite que possam ser combinadas diferentes técnicas de geração de malha, como as de Delaunay e Avanço de Fronteira, por exemplo.
 
-O último requisito é também muito importante, já que a velocidade e a qualidade da malha são atualmente um dos principais objetivos de estudo na área da geometria computacional.
+O último requisito é também muito importante, já que a velocidade e a qualidade da malha são, atualmente, um dos principais objetivos de estudo na área da geometria computacional.
 
 É importante observar que, apesar deste trabalho focar na geração de malhas tridimensionais, a técnica paralela é genérica, e funciona tanto para duas quanto para três dimensões. Assim, sempre que for mais didático, o caso bidimensional será utilizado para exemplificar alguns aspectos da técnica.
 
@@ -39,15 +39,15 @@ O último requisito é também muito importante, já que a velocidade e a qualid
 
 Na técnica proposta a entrada pode ser uma lista de segmentos que definem uma fronteira, para o caso bidimensional, ou um conjunto de faces que definem uma superfície, para o caso tridimensional. A entrada pode definir um ou mais objetos, que podem conter ou não buracos. 
 
-Uma estrutura de dados do tipo árvore(\textit{quadtree} para o caso bidimensional e \textit{octree} para o caso tridimensional) será criada e refinada de acordo com o tamanho dos elementos dados como entrada(arestas para o caso bidimensional e faces para o caso tridimensional), levando em consideração que o tamanho das células internas desta árvore não pode ser maior que o maior elemento da entrada. Esta estrutura de dados é chamada de \textit{quadtree} ou \textit{octree} de densidade ou de carga.
+Uma estrutura de dados do tipo árvore (\textit{quadtree} para o caso bidimensional e \textit{octree} para o caso tridimensional) será criada e refinada de acordo com o tamanho dos elementos dados como entrada (arestas para o caso bidimensional e faces para o caso tridimensional), levando em consideração que o tamanho das células internas desta árvore não pode ser maior que o maior elemento da entrada. Esta estrutura de dados é chamada de \textit{quadtree} ou \textit{octree} de densidade ou de carga.
 
-Com a árvore de densidade devidamente criada, a estimativa de carga é realizada. Este processo de estimativa é feito baseado na quantidade de células que são internas ao domínio. O próximo passo é o particionamento da entrada em diversas partes. Para realizar o particionamento do domínio, uma estrutura de dados espacial que divide regiões nos eixos cartesianos deve ser utilizada para que a técnica de geração de subdomínios funcione perfeitamente. Isso será mostrado na seção \ref{sec:Decomposicao_dominio}.
+Com a árvore de densidade devidamente criada, a estimativa de carga é realizada. Este processo de estimativa é feito baseado na quantidade de células que são internas ao domínio. O próximo passo é o particionamento da entrada em diversas partes. Para realizar o particionamento do domínio, uma estrutura de dados espacial, que divide regiões nos eixos cartesianos, deve ser utilizada para que a técnica de geração de subdomínios funcione perfeitamente. Isso será mostrado na seção \ref{sec:Decomposicao_dominio}.
 
 O algoritmo de geração das malhas de interfaces dos subdomínios recebe o resultado do particionamento do domínio e cria os novos subdomínios, tendo cada um deles sua interface totalmente compatível com as de seus vizinhos.
 
 O balanceamento da carga é feito a medida que as interfaces são criadas, alocando as novas partições para os processadores disponíveis a medida que o particionamento acontece, dessa forma os processadores se tornam responsáveis pela geração da interface dos seus respectivos subdomínios, no caso que o número de tarefas criadas seja maior que a quantidade de processadores disponíveis. 
 
-Por fim a malha é então gerada em cada um dos subdomínios e ao final é feita uma junção dos pedaços da malha e realizado algumas melhorias. A Figura \ref{fig:fluxograma} mostra o fluxograma de como a técnica procede, a parte em azul indica que é realizada em paralelo.
+Por fim a malha é então gerada em cada um dos subdomínios e ao final é feita uma junção dos pedaços da malha e é realizado então algumas melhorias. A Figura \ref{fig:fluxograma} mostra o fluxograma de como a técnica procede, a parte em azul indica que é realizada em paralelo.
 
 \begin{figure}[!ht]
 	\centering
@@ -63,7 +63,7 @@ Por fim a malha é então gerada em cada um dos subdomínios e ao final é feita
 Em Computação de Alto Desempenho (CAD), a carga é uma medida da quantidade de trabalho a ser realizado em um subdomínio ou um conjunto de subdomínios. Em problemas de geração de malha, a carga está relacionada com o número de elementos que serão gerados em cada subdomínio. Portanto, a carga está relacionada com as seguintes questões, que devem ser levadas em conta em sua estimativa (Figuras~\ref{fig:malha_norma_refinada} e~\ref{fig:malha_uniforme_não_uniforme}):
 
 \begin{itemize}
-	\item O nível de discretização da malha, geralmente especificado pelo usuário ou por outro software, através de parâmetros de entrada. Quanto maior a discretização da malha, maior será a carga (Figura \ref{fig:malha_norma_refinada} e \ref{fig:malha_norma_refinada_trid}).
+	\item O nível de discretização da malha, geralmente especificado pelo usuário ou por outro software, através de parâmetros de entrada. Quanto maior a discretização da malha, maior será a carga (Figura \ref{fig:malha_norma_refinada} e \ref{fig:malha_norma_refinada_trid});
 
 \begin{figure}[!ht]
 	\centering
@@ -79,7 +79,7 @@ Em Computação de Alto Desempenho (CAD), a carga é uma medida da quantidade de
 	\label{fig:malha_norma_refinada_trid}
 \end{figure}
 
-	\item Em regiões com o mesmo nível de discretização, uma região maior gera mais elementos do que uma região menor. Assim, quanto maior for a região, maior será a carga (esquerda da Figura \ref{fig:malha_uniforme_não_uniforme} e \ref{fig:malha_uniforme_não_uniforme_trid}).
+	\item Em regiões com o mesmo nível de discretização, uma região maior gera mais elementos do que uma região menor. Assim, quanto maior for a região, maior será a carga (esquerda da Figura \ref{fig:malha_uniforme_não_uniforme} e \ref{fig:malha_uniforme_não_uniforme_trid});
 	\item Em domínios com diferentes níveis de discretização, regiões de mesmo tamanho podem gerar um número de elementos diferente, dependendo do nível de refinamento de cada região. Assim, quanto mais refinada for a malha na região, maior será a carga(direita da Figura \ref{fig:malha_uniforme_não_uniforme} e \ref{fig:malha_uniforme_não_uniforme_trid}).
 \end{itemize}
 
@@ -94,7 +94,7 @@ Em Computação de Alto Desempenho (CAD), a carga é uma medida da quantidade de
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{fig/cubes_comp_uniform.png}
-	\caption{Estimativa de carga para o caso tridimensional: face de um cubo com malha uniforme (esquerda) e uma face de um cubo com malha não-uniforme (direita).}
+	\caption{Estimativa de carga para o caso tridimensional: faces de um cubo com malha uniforme (esquerda) e um cubo com malha não-uniforme (direita).}
 	\label{fig:malha_uniforme_não_uniforme_trid}
 \end{figure}
 
@@ -108,7 +108,7 @@ A \textit{quadtree} de estimativa de carga ou \textit{quadtree} de densidade é 
 
 Dois refinamentos são então aplicados. O primeiro é para garantir que todas as células da \textit{quadtree} de densidade não sejam maiores que a maior célula que contém um ponto médio da borda de entrada (Figura \ref{fig:passo2_estimativa}). Com esse refinamento é garantido um tamanho máximo para as células de acordo com as arestas da fronteira. Assim, os elementos que serão gerados no interior do domínio terão proporções iguais aos da borda. 
 
-O segundo refinamento, também conhecido na literatura como refinamento 2:1, é para garantir que a diferença de níveis da \textit{quadtree} não seja maior que 2 para células vizinhas (que compartilham um lado), como mostrado na Figura \ref{fig:passo3_estimativa}. Este refinamento é feito para garantir uma transição suave entre elementos grandes e pequenos. Mais detalhes de como essa \textit{quadtree} é construída podem ser encontrados em~\cite{bib:Miranda99} (a construção de sua versão tridimensional, uma \textit{octree}, pode ser encontrada em~\cite{bib:Cavalcante-Neto01}).
+O segundo refinamento, também conhecido na literatura como refinamento 2:1, é para garantir que a diferença de níveis da \textit{quadtree} não seja maior que 2 para células vizinhas (que compartilham um lado), como mostrado na Figura \ref{fig:passo3_estimativa}. Este refinamento é feito para garantir uma transição suave entre elementos grandes e pequenos. Mais detalhes da construção desta \textit{quadtree} podem ser encontrados em \cite{bib:Miranda99} (a construção de sua versão tridimensional, uma \textit{octree}, pode ser encontrada em~\cite{bib:Cavalcante-Neto01}).
 
 
     \begin{figure}[ht]
@@ -155,7 +155,7 @@ A \textit{quadtree} de densidade é utilizada para fazer uma estimativa da carga
 
 \section{Decomposição do Domínio}\label{sec:Decomposicao_dominio}
 
-A técnica proposta neste trabalho tem apenas um pré-requisito quanto à estrutura de decomposição espacial para particionar o domínio dado como entrada. A estrutura de decomposição deve gerar regiões que sejam paralelas às células da \textit{quadtree} de densidade. Estruturas baseadas em árvore como \textit{quadtree}, \textit{octree}, BSP e \textit{Kd-tree} geram regiões que possibilitam a perfeita execução do algoritmo de geração dos subdomínios.
+A técnica proposta neste trabalho tem apenas um pré-requisito quanto à estrutura de decomposição espacial para particionar o domínio dado como entrada. A estrutura de decomposição deve gerar regiões que sejam paralelas às células da \textit{quadtree} de densidade. Estruturas baseadas em árvore como \textit{quadtree}, \textit{octree}, BSP (\textit{Binary Space Partition}) e \textit{Kd-tree} (\textit{k-dimensional tree}) geram regiões que possibilitam a perfeita execução do algoritmo de geração dos subdomínios.
 
 Essa restrição tem a finalidade de preservar o calculo feito na estimativa de carga, já que calcular interseções parciais da partição com as células da estrutura de estimativa de carga para descobrir a fração de carga está interna a partição é pesado computacionalmente.
 
@@ -164,12 +164,12 @@ Vale lembrar que para um bom particionamento é preciso uma boa estimativa de ca
 
 \subsection{Decomposição Utilizando BSP}
 
-Uma excelente estrutura de particionamento é a BSP, aqui chamada de BSP de decomposição, tendo a sua criação guiada pela estrutura de estimativa de carga descrita anteriormente na Seção~\ref{sec:Estimativa_de_Carga}. A utilização desta estrutura foi baseada no trabalho de \cite{bib:RepMarkos13}, onde mais detalhes da construção e implementação podem ser encontrados nele. A BSP de decomposição pode ser construída de diversas formas, dependendo apenas do critério de subdivisão:
+Uma excelente estrutura de particionamento espacial é a BSP, aqui chamada de BSP de decomposição, tendo a sua criação guiada pela estrutura de estimativa de carga descrita anteriormente na Seção~\ref{sec:Estimativa_de_Carga}. A utilização desta estrutura foi baseada no trabalho de \cite{bib:RepMarkos13}, onde mais detalhes da construção e implementação podem ser encontrados nele. A BSP de decomposição pode ser construída de diversas formas, dependendo apenas do critério de subdivisão:
 
 
 \begin{itemize}
 	\item Subdivisão baseada na carga. Cada célula folha não pode ter uma carga maior que a carga média;
-	\item Subdivisão baseada na diferença de carga total de cada as partições(Figura \ref{fig:bsp_decomposition_passos}); e 
+	\item Subdivisão baseada na diferença de carga total de cada as partições (Figura \ref{fig:bsp_decomposition_passos}); e 
 	\item Subdivisão baseada no eixo mediano.
 \end{itemize}
 
@@ -200,7 +200,7 @@ Uma excelente estrutura de particionamento é a BSP, aqui chamada de BSP de deco
 \end{figure}    
 
 
-As principais vantagens da utilização de uma BSP são: a quantidade de subdivisões realizadas; e a liberdade que a BSP tem de subdividir o domínio em regiões de diferentes tamanhos. A possibilidade de gerar a quantidade de regiões que sejam necessárias com diferentes tamanhos torna o particionamento muito mais preciso. A Figura \ref{fig:bsp_decomposition_passos} mostra o passo a passo da criação de uma BSP de particionamento feita para dez processadores, ou seja, dez subdomínios foram criados.
+As principais vantagens da utilização de uma BSP são a quantidade de subdivisões realizadas e a liberdade que a BSP tem de subdividir o domínio em regiões de diferentes tamanhos. A possibilidade de gerar a quantidade de regiões que sejam necessárias com diferentes tamanhos torna o particionamento muito mais preciso. A Figura \ref{fig:bsp_decomposition_passos} mostra o passo a passo da criação de uma BSP de particionamento feita para dez processadores, ou seja, dez subdomínios foram criados.
 
 Para gerar a BSP de decomposição a forma mais eficiente é a que faz a carga associada com cada uma das folhas ser menor que uma carga máxima pré-definida $L/P$, sendo $L$ a carga total da entrada e $P$ a quantidade de processadores disponíveis. Com a BSP, é possível obter $N=P$, sendo $N$ a quantidade de subdomínios criados, com uma carga de muito próxima a $L/P$ para cada $P$.
 
@@ -246,14 +246,14 @@ Nos casos que o número de partições desejado seja ímpar, é aplicado um valo
 
 \section{Interfaces dos Subdomínios}
 
-Na geração das interfaces dos subdomínios, é necessário ter a estrutura de estimativa de carga( uma \textit{quadtree} no caso bidimensional e uma \textit{octree} no caso tridimensional) e a estrutura de particionamento devidamente criadas(a BSP). Qualquer outra estrutura de decomposição espacial que gere regiões paralelas aos eixos pode ser utilizada nessa técnica de geração de subdomínios. 
+Na geração das interfaces dos subdomínios, é necessário ter a estrutura de estimativa de carga ( uma \textit{quadtree} no caso bidimensional e uma \textit{octree} no caso tridimensional) e a estrutura de particionamento devidamente criadas (a BSP). Qualquer outra estrutura de decomposição espacial que gere regiões paralelas aos eixos pode ser utilizada nessa técnica de geração de subdomínios. 
 
 Para construir a interface dos subdomínios é necessário possuir uma grade de suporte e os elementos do modelo de entrada em que a partição faz interseção. A grade de suporte irá guiar a a criação do elementos da interface, sendo ela responsável pelo tamanho e posicionamento dos mesmos. Os elementos do modelo que fazem interseção com a partição são necessários para fazer a junção da interface com o modelo, de tal modo que ao final não exista nenhum buraco na interface.
 
 \subsection{Grade de Suporte}
 \label{sec:Grade_Suporte}
 
-Para cada corte da estrutura de particionamento é feito a interseção com as células folhas da estrutura de estimativa de carga (Figura \ref{fig:celulas_selecionadas2d_tree} para o caso bidimensional e Figura \ref{fig:celulas_selecionadas3d_tree} para o caso tridimensional). Como resultado dessa interseção, é obtido um conjunto de células da estrutura de estimativa de carga que cruzam ou apenas tangenciam a partição que se deseja criar. Essas células guiarão a criação das fronteiras dos seus respectivos subdomínios (células em azul nas Figuras \ref{fig:celulas_selecionadas2d_particoes} e \ref{fig:celulas_selecionadas3d_particoes}). A estrutura de estimativa de carga possui informações de tamanho, que são baseadas nas arestas da borda, essas informações ajudam na criação da malha de interface compatível com a discretização do domínio.
+Para cada corte da estrutura de particionamento é feita a interseção com as células folhas da estrutura de estimativa de carga (Figura \ref{fig:celulas_selecionadas2d_tree} para o caso bidimensional e Figura \ref{fig:celulas_selecionadas3d_tree} para o caso tridimensional). Como resultado dessa interseção, é obtido um conjunto de células da estrutura de estimativa de carga que cruzam ou apenas tangenciam a partição que se deseja criar. Essas células guiarão a criação das fronteiras dos seus respectivos subdomínios (fronteiras criadas para o caso bidimensional e tridimensional nas Figuras \ref{fig:celulas_selecionadas2d_particoes} e \ref{fig:celulas_selecionadas3d_particoes}). A estrutura de estimativa de carga possui informações de tamanho, que são baseadas nas arestas ou faces do modelo de entrada, essas informações ajudam na criação da malha de interface compatível com a discretização do domínio.
 
 A Figura \ref{fig:celulas_selecionadas2d} mostra um exemplo do caso bidimensional da junção da \textit{quadtree} de estimativa de carga com uma BSP de particionamento e a sua interface gerada, já na Figura \ref{fig:celulas_selecionadas3d} mostra um exemplo para o caso tridimensional da junção da \textit{octree} de estimativa de carga com uma BSP de particionamento e a sua interface gerada.
 
@@ -288,6 +288,8 @@ A Figura \ref{fig:celulas_selecionadas2d} mostra um exemplo do caso bidimensiona
 	\label{fig:celulas_selecionadas3d}
 \end{figure}
 
+
+Dentre todas as células da estrutura de estimativa de carga, deve-se selecionar um conjunto de células que fazem interseção com a estrutura de particionamento. As células que não fazem nenhum tipo de interseção com a estrutura de particionamento não estarão nesse conjunto
 
 Células que estão totalmente fora da fronteira do domínio, ou seja, que não estão dentro e nem sobre a fronteira do domínio, mas que também fazem interseção com a estrutura de particionamento, não devem fazer parte desse conjunto. Como essas células estão totalmente fora do domínio, não haverá criação de interfaces nessas regiões; logo, elas devem ser retiradas desse conjunto.
 

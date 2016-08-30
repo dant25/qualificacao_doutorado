@@ -1,4 +1,4 @@
-\chapter{Tema Secundário II : Particionamento de Modelos para geração Malha em paralelo}\label{tema2}
+\chapter{Tema Secundário II : Particionamento de Modelos para geração de Malhas em paralelo}\label{tema2}
 
 
 Todo desenvolvimento de um programa paralelo tem que passar por três fases que são: particionamento da entrada, agrupamento das partições e mapeamento dos agrupamentos. Estes conceitos partem da ideia que para um bom algoritmo paralelo executar, é preciso uma boa estratégia de divisão ou particionamento da entrada para ao final ser feita a junção das várias soluções.
@@ -17,7 +17,7 @@ Existem diversos tipos de malhas, entre as mais conhecidas e utilizadas estão a
  \begin{figure}[htbp]
  	\centering
  	\includegraphics[width=1.0\textwidth]{fig/malha_bi_tri.png}
- 	\caption{Exemplo duas malhas triangulares, uma bidimensional e outra tridimensional.} 
+ 	\caption{Exemplo de duas malhas triangulares, uma bidimensional e outra tridimensional.} 
  	\label{fig:malhas_triangulares}
  \end{figure}
 
@@ -46,7 +46,7 @@ Uma triangulação também é uma malha, mas nem toda malha é uma triangulaçã
  \begin{figure}[htbp]
  	\centering
  	\includegraphics[width=0.3\textwidth]{fig/malha_invalida.png}
- 	\caption{Exemplo de malhas uma bidimensional que não é uma triangulação válida.} 
+ 	\caption{Exemplo de uma malha bidimensional que não é uma triangulação válida.} 
  	\label{fig:malha_invalida}
  \end{figure}
 
@@ -69,7 +69,7 @@ Esta métrica $\alpha$ tem valor $1,0$ para um triângulo equilátero. Quanto pi
  \begin{figure}[htbp]
      \centering
      \includegraphics[width=0.5\textwidth]{fig/qualidade_elemento.png}
-     \caption{Exemplo de um elemento triangular de boa qualidade (esquerda) e dois de péssima qualidade (direita).} 
+     \caption{Exemplo de um elemento triangular de boa qualidade (esquerda) e de dois com baixa qualidade (direita).} 
      \label{fig:qualidade_elemento}
  \end{figure}
 
@@ -269,7 +269,7 @@ O Trabalho de \cite{bib:VIDWANS94} apresenta uma técnica de particionamento Con
  \begin{figure}[htbp]
      \centering
      \includegraphics[width=0.5\textwidth]{fig/vidwans.png}
-     \caption{Exemplo do método de divisão e conquistar de \cite{bib:VIDWANS94} para equilibrar a carga entre quatro processadores. (a) distribuição de carga inicial. (b) Distribuição de carga após o passo 1. (c) Distribuição de carga após o passo 2.}
+     \caption{Exemplo do método de Divisão e Conquistar de \cite{bib:VIDWANS94} para equilibrar a carga entre quatro processadores. (a) distribuição de carga inicial. (b) Distribuição de carga após o passo 1. (c) Distribuição de carga após o passo 2.}
      \label{fig:vidwans}
  \end{figure} 
 
@@ -290,7 +290,7 @@ No trabalho de \cite{bib:GAITHER96} traz uma técnica de geração de malha bidi
  \begin{figure}[htbp]
      \centering
      \includegraphics[width=0.8\textwidth]{fig/wu.png}
-     \caption{O passo a passo da técnica de \cite{bib:WU96}.}
+     \caption{Passo a passo da técnica de \cite{bib:WU96}.}
      \label{fig:wu}
  \end{figure}  
 
