@@ -1,0 +1,8 @@
+\begin{resumo}
+
+Este trabalho descreve uma técnica de decomposição de domínios para geração em paralelo de malhas. Esta técnica permite que se utilize qualquer estrutura de dados que gere regiões paralelas aos eixos para decompor o domínio dado como entrada. Além disso, qualquer processo de geração de malha que respeite os pré-requisitos estabelecidos pode ser empregado nos subdomínios criados, como as técnicas de Delaunay ou de Avanço de Fronteira, dentre outras. A técnica proposta é dita \textit{a priori} porque a malha de interface entre os subdomínios é gerada antes das suas malhas internas. A estimativa de carga de processamento associada a cada subdomínio é feita nesse trabalho com a ajuda de uma \textit{quadtree} / \textit{octree} refinada, cujo nível de refinamento orienta a criação da malha de interface, que é definida a partir da discretização das células internas da \textit{quadtree} / \textit{octree} refinada. Graças a uma boa estimativa de carga, um bom particionamento do domínio é obtido, fazendo com que a geração da malha em paralelo seja mais rápida do que a geração serial. Além disso, a qualidade da malha gerada em paralelo é qualitativamente equivalente àquela gerada serialmente. 
+
+
+\palavraschave
+\end{resumo}
+\pagebreak
