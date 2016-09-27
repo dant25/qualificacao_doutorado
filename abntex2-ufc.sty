@@ -1,0 +1,199 @@
+%%
+%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para a Universidade Federal do Ceará
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Luan Falcão Daniel Santos, luan_aero@yahoo.com.br
+%%
+%% Further information about abnTeX2 are available on http://abntex2.googlecode.com/
+%%
+
+% ---
+% INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DO CEARA
+% ---
+\usepackage{float}
+
+\usepackage{graphicx}
+
+\newcommand{\membroumname}{Membro um:}
+\newcommand{\membrodoisname}{Membro dois:}
+\newcommand{\membrotresname}{Membro três:}
+
+\newcommand{\dataaprovacaoname}{}
+\newcommand{\dataaprovacao}[1]{\renewcommand{\dataaprovacaoname}{#1}}
+
+% Comandos de dados - Membro da banca um
+\providecommand{\imprimirmembroumRotulo}{}
+\providecommand{\imprimirmembroum}{}
+\newcommand{\membroum}[2][\membroumname]%
+  {\renewcommand{\imprimirmembroumRotulo}{#1}%
+   \renewcommand{\imprimirmembroum}{#2}}
+   
+% Comandos de dados - Membro da banca dois
+\providecommand{\imprimirmembrodoisRotulo}{}
+\providecommand{\imprimirmembrodois}{}
+\newcommand{\membrodois}[2][\membrodoisname]%
+  {\renewcommand{\imprimirmembrodoisRotulo}{#1}%
+   \renewcommand{\imprimirmembrodois}{#2}}
+
+% Comandos de dados - Membro da banca três
+\providecommand{\imprimirmembrotresRotulo}{}
+\providecommand{\imprimirmembrotres}{}
+\newcommand{\membrotres}[2][\membrotresname]%
+  {\renewcommand{\imprimirmembrotresRotulo}{#1}%
+   \renewcommand{\imprimirmembrotres}{#2}}
+
+% alterando a capa
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \center
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.9]{abntex2-ufc-brasao.pdf}
+\end{figure}
+    {\ABNTEXchapterfont\bfseries{\imprimirinstituicao\vspace*{3.5cm}}}
+
+    {\ABNTEXchapterfont\bfseries\imprimirautor\vspace*{3.5cm}}
+
+    {\ABNTEXchapterfont\bfseries\imprimirtitulo}
+    \vspace*{\fill}
+
+    {\bfseries\imprimirlocal}
+    \par
+    {\bfseries\imprimirdata}
+
+    \vspace*{1cm}
+  \end{capa}
+}
+
+
+% folha de rosto
+
+\makeatletter
+
+\renewcommand{\folhaderostocontent}{
+\begin{center}
+{\ABNTEXchapterfont\imprimirautor}
+
+\vspace*{3.5cm}
+
+{\ABNTEXchapterfont\imprimirtitulo}
+
+\vspace*{\fill}
+
+\abntex@ifnotempty{\imprimirpreambulo}{%
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+  \SingleSpacing
+  \imprimirpreambulo
+  \end{minipage}%
+}%
+
+\abntex@ifnotempty{\imprimirorientador}{%
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+  \SingleSpacing
+  \imprimirorientador\\\imprimirorientadorRotulo
+  \end{minipage}%
+  %\vspace*{\fill}
+}%
+
+\abntex@ifnotempty{\imprimircoorientador}{%
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+  \SingleSpacing
+  \imprimircoorientador\\\imprimircoorientadorRotulo
+  \end{minipage}%
+  %\vspace*{\fill}
+}%
+
+\abntex@ifnotempty{\imprimirmembroum}{%
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+  \SingleSpacing
+  \imprimirmembroum\\\imprimirmembroumRotulo
+  \end{minipage}%
+  %\vspace*{\fill}
+}%
+
+\abntex@ifnotempty{\imprimirmembrodois}{%
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+  \SingleSpacing
+  \imprimirmembrodois\\\imprimirmembrodoisRotulo
+  \end{minipage}%
+  %\vspace*{\fill}
+}%
+
+\abntex@ifnotempty{\imprimirmembrotres}{%
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+  \SingleSpacing
+  \imprimirmembrotres\\\imprimirmembrotresRotulo
+  \end{minipage}%
+  %\vspace*{\fill}
+}%
+
+\vspace*{\fill}
+
+{\imprimirlocal}
+
+\par
+
+{\imprimirdata}
+\vspace*{1cm}
+\end{center}
+}
+
+\makeatother
+
+%folha de aprovação
+\newcommand{\imprimirfolhadeaprovacao}{
+\begin{folhadeaprovacao}
+\begin{center}
+{\ABNTEXchapterfont\imprimirautor}
+
+\vspace*{\fill}\vspace*{\fill}
+{\ABNTEXchapterfont\imprimirtitulo}
+\vspace*{\fill}
+
+\hspace{.45\textwidth}
+\begin{minipage}{.5\textwidth}
+\imprimirpreambulo
+\end{minipage}%
+\vspace*{\fill}
+\end{center}
+
+Aprovada em \dataaprovacaoname
+
+\begin{center}
+BANCA EXAMINADORA
+\end{center}
+
+\ifthenelse{\not\equal{\imprimirorientador}{}}{\assinatura{\textbf{\imprimirorientador}\\\imprimirorientadorRotulo}}{}
+\ifthenelse{\not\equal{\imprimircoorientador}{}}{\assinatura{\textbf{\imprimircoorientador}\\\imprimircoorientadorRotulo}}{}
+\ifthenelse{\not\equal{\imprimirmembroum}{}}{\assinatura{\textbf{\imprimirmembroum}\\\imprimirmembroumRotulo}}{}
+\ifthenelse{\not\equal{\imprimirmembrodois}{}}{\assinatura{\textbf{\imprimirmembrodois}\\\imprimirmembrodoisRotulo}}{}
+\ifthenelse{\not\equal{\imprimirmembrotres}{}}{\assinatura{\textbf{\imprimirmembrotres}\\\imprimirmembrotresRotulo}}{}
+
+\begin{center}
+\vspace*{0.5cm}
+{\large\imprimirlocal}
+\par
+{\large\imprimirdata}
+\vspace*{1cm}
+\end{center}
+
+\end{folhadeaprovacao}
+}
+% ---
+% FIM DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DO CEARA
+% ---
